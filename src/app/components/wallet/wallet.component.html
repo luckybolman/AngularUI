@@ -1,0 +1,153 @@
+<div class="d-flex background-main">
+    <div style="width: 200px;">
+       <app-side-menu name="wallet"></app-side-menu>
+    </div>
+    <div class="w-100 align-self-stretch text-info">
+      <ng-template #send let-modal>
+        <div style="background-color: #1d2b3a;">
+              <img src="./assets/close_button.png" class="close_button" (click)="modal.dismiss('Cross click')">
+        </div>
+        <div style="background-color: #1d2b3a;">
+            <div style="text-align:center;">
+                <img src={{selectedIcon}} alt="LOGO" class="coin_logo">      
+            </div>
+        </div>
+        <div class="modal-body text-center">
+          <div style="display:flex;">
+            <div style="display:inline-block;">
+              <img src="./assets/qr_icon.png" class="copy_icon">
+            </div>
+            <div style="display:inline-block;">
+              <form class="input-form" >
+                <mat-form-field class="input-full-width">
+                    <input matInput  placeholder="Send to address..." class="btc-text" [ngStyle]="{'color':buttonColor,'border-color':buttonColor}">
+                </mat-form-field>
+              </form>
+            </div>
+          </div>
+
+          <div style="display:flex;margin-top:25px;">
+            <div style="display:inline-block;">
+              <img src="./assets/amount_icon.png" class="copy_icon" style="margin-top:15px;">
+            </div>
+            <div style="display:inline-block;">
+              <form class="input-form">
+                  <mat-form-field class="input-full-width">
+                      <input matInput class="btc-text" [ngStyle]="{'color':buttonColor,'border-color':buttonColor}">                  
+                  </mat-form-field>
+
+                  <mat-form-field class="input-full-width">
+                      <input matInput class="usd-text">                    
+                  </mat-form-field>
+              </form>
+            </div>
+            <div style="display:inline-block;">
+              <p [ngStyle]="{'color':buttonColor}" style="margin-top:15px;">{{selectedCoin}}</p>
+            </div>
+            <div style="display:inline-block;">
+                <p style="color:white;margin-top:50px;margin-left:-25px;">USD</p>
+                </div>
+          </div>
+          <div>
+            <button class="modal_button" [ngStyle]="{'background-color':buttonColor}">
+              Send
+            </button>
+          </div>
+           
+       </div>
+      </ng-template>
+      <ng-template #receive let-modal>
+        <div style="background-color: #1d2b3a;">
+            <img src="./assets/close_button.png" class="close_button" (click)="modal.dismiss('Cross click')">
+        </div>
+        <div style="background-color: #1d2b3a;">
+          <div style="text-align:center;">
+              <img src={{selectedIcon}} alt="LOGO" class="coin_logo">      
+          </div>
+        </div>
+        <div class="modal-body text-center">
+            <h4 style="color:white;margin-top:30px;">Your address</h4>
+            <p style="color:white;">{{selectedAddress}}</p>
+            <img src="./assets/copy_icon.png" class="copy_icon">
+        </div>
+        <div class="qr_code">
+          <img [src]="qrCodeAddress">
+          <p style="font-size:15px;color:white;margin-top:10px;">Scan address</p>
+        </div>
+      </ng-template>
+      <div style="width:200px;float:left;border-right:2px solid;padding-right:20px;" [ngStyle]="{'border-color':buttonColor}">
+          <nav>
+            <ul>
+              <li (click)="setCoin('BTC')">
+                <div class="btc_title">
+                  Bitcoin
+                </div>
+                <div class="coin_amount">
+                  0 BTC
+                </div>
+              </li>
+              <li (click)="setCoin('ETH')">
+                <div class="coin_title">
+                  Ethereum
+                </div>
+                <div class="coin_amount">
+                  0 ETH
+                </div>
+              </li>
+              <li (click)="setCoin('LTC')">
+                <div class="coin_title">
+                  Litecoin
+                </div>
+                <div class="coin_amount">
+                  0 LTC
+                </div>
+              </li>
+              <li (click)="setCoin('MOLK')">
+                <div class="coin_title">
+                  MobilinkToken
+                </div>
+                <div class="coin_amount">
+                  0 MOLK
+                </div>
+              </li>
+            </ul>
+          </nav>
+      </div>
+      <div style="float:left;width:calc(100% - 200px);text-align: center;">
+          <div style="margin-top:20px;">
+                <img src={{selectedIcon}} alt="LOGO" class="coin_logo">        
+          </div>
+          <div>
+          <div style="display:inline-block;">
+              <div style="font-size:55px;margin-right:5px;" [ngStyle]="{'color':buttonColor}">0</div> 
+          </div>
+          <div style="display:inline-block;font-size:26px;" [ngStyle]="{'color':buttonColor}">
+              {{selectedCoin}}
+          </div>
+          </div>
+          <div>
+          <div style="display:inline-block;font-size:17px;color:lightgray;">
+            $
+          </div>
+          <div style="display:inline-block;font-size:28px;color:white;">
+            0.00
+          </div>
+          <div style="display:inline-block;font-size:17px;color:lightgray;">
+            USD
+          </div>
+          </div>
+          <div style="margin-top:20px;">
+            <div style="display:inline-block;">
+              <button class="main_btn" [ngStyle]="{'background-color':buttonColor}" (click)="openModal(send)">
+                Send
+              </button>
+            </div>
+            <div style="display:inline-block">
+              <button class="main_btn" [ngStyle]="{'background-color':buttonColor}" (click)="openModal(receive)">
+                Receive
+            </button>
+            </div>
+          </div>
+      </div>
+    </div>
+</div>

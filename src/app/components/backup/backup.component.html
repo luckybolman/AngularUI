@@ -1,0 +1,201 @@
+<div class="d-flex background-main">
+    <div style="width: 200px;">
+       <app-side-menu name="backup"></app-side-menu>
+    </div>
+    <div class="w-100 align-self-stretch text-info">
+        <div *ngIf="!isBackup" style="background-color:#1d2b3a;">
+            <div class="dep_logo">
+                <img src="./assets/deposit_icon.png" alt="LOGO" class="deposit_logo" (click)="gotoStepPage();">
+            </div>
+            
+            <div class="h1 text-center waiting_msg">
+                 Waiting For Your First Deposit
+            </div>
+            <div class="text-center sub_msg">
+                 The step-by-step backup wizard will show once you make a deposit.
+            </div>
+            
+        </div>
+        <div *ngIf="isBackup" style="text-align:center;">
+            <div>
+                <div [ngClass]="step==1?'stage1_active':'stage1'">
+                    1
+                </div>
+                <div class = "line"></div>
+                <div [ngClass]="step==2?'stage_active':'stage'">
+                    2
+                </div>
+                <div class = "line"></div>
+                <div [ngClass]="step==3?'stage_active':'stage'">
+                    3
+                </div>
+                <div class = "line"></div>
+                <div [ngClass]="step==4?'stage_active':'stage'">
+                    4
+                </div>
+            </div>
+            <div style="color:darkgray;font-size:20px;margin-top:10px;">
+                Step {{step}} of 4
+            </div>
+            <div style="color:white;font-size:35px;margin-top:10px;padding:10px;">
+                {{stepTitle}}
+            </div>
+            <div style="color:white;font-size:17px;margin-top:10px;padding:10px;">
+                {{stepDescription}}
+            </div>
+            <div>
+                <input type="password" class="input_password" id="password" [(ngModel)] = "password" 
+                placeholder="Enter Password" (keyup)="checkPassword()" *ngIf="step==1||step==2">
+                <!-- <div class="label password-count" ng-class="password.length > 7 ? 'label-success' : 'label-danger'" 
+                 ng-cloak>{{ password | passwordCount:7 }}</div>
+                    
+                <div class="strength-meter">
+                       <div class="strength-meter-fill" data-strength="{{passwordStrength}}"></div>
+                </div> -->
+            </div>
+            <div>
+                    <input type="text" class="input_password" id="email" [(ngModel)] = "email" 
+                    placeholder="Enter your email address"  *ngIf="step==4">
+                    <!-- <div class="label password-count" ng-class="password.length > 7 ? 'label-success' : 'label-danger'" 
+                     ng-cloak>{{ password | passwordCount:7 }}</div>
+                        
+                    <div class="strength-meter">
+                           <div class="strength-meter-fill" data-strength="{{passwordStrength}}"></div>
+                    </div> -->
+                </div>
+            <div class="phrase" *ngIf = "step==3">
+                <nav>
+                    <ul>
+                        <li style="margin-top:10px;">
+                            <div class="phrase_item">
+                                <div class="number">
+                                    1
+                                </div>
+                                <div class="word">
+                                    alone
+                                </div>
+                            </div>
+                            <div class="phrase_item">
+                                <div class="number">
+                                    2
+                                </div>
+                                <div class="word">
+                                    bubble
+                                </div>
+                            </div>
+                            <div class="phrase_item">
+                                <div class="number">
+                                    3
+                                </div>
+                                <div class="word">
+                                    away
+                                </div>
+                            </div>
+                            <div class="phrase_item">
+                                <div class="number">
+                                    4
+                                </div>
+                                <div class="word">
+                                    syrup
+                                </div>
+                            </div>
+                        </li>
+                        <li style="margin-top:10px;">
+                                <div class="phrase_item">
+                                        <div class="number">
+                                            5
+                                        </div>
+                                        <div class="word">
+                                            language
+                                        </div>
+                                    </div>
+                                    <div class="phrase_item">
+                                        <div class="number">
+                                            6
+                                        </div>
+                                        <div class="word">
+                                            analyst
+                                        </div>
+                                    </div>
+                                    <div class="phrase_item">
+                                        <div class="number">
+                                            7
+                                        </div>
+                                        <div class="word">
+                                            solider
+                                        </div>
+                                    </div>
+                                    <div class="phrase_item">
+                                        <div class="number">
+                                            8
+                                        </div>
+                                        <div class="word">
+                                            large
+                                        </div>
+                                    </div>
+                        </li>
+                        <li style="margin-top:10px;">
+                                <div class="phrase_item">
+                                        <div class="number">
+                                            9
+                                        </div>
+                                        <div class="word">
+                                            sheriff
+                                        </div>
+                                    </div>
+                                    <div class="phrase_item">
+                                        <div class="number">
+                                            10
+                                        </div>
+                                        <div class="word">
+                                            oval
+                                        </div>
+                                    </div>
+                                    <div class="phrase_item">
+                                        <div class="number">
+                                            11
+                                        </div>
+                                        <div class="word">
+                                            release
+                                        </div>
+                                    </div>
+                                    <div class="phrase_item">
+                                        <div class="number">
+                                            12
+                                        </div>
+                                        <div class="word">
+                                            meadow
+                                        </div>
+                                    </div>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
+            <div>
+                <button class="back_button" (click)="gotoStep1();" *ngIf="step==2">
+                    Back
+                </button>
+                <button class="next_button" (click)="gotoStep2();" *ngIf="step==1">
+                    Next
+                </button>
+                <button class="next_button" style="opacity:0.3" (click)="gotoStep3();" disabled *ngIf="!isMatched&&step==2">
+                    Next
+                </button>
+                <button class="next_button" style="opacity:1" (click)="gotoStep3();"  *ngIf="isMatched&&step==2">
+                    Next
+                </button>
+                <button class="back_button"  *ngIf="step==3">
+                    Print
+                </button>
+                <button class="next_button" (click)="gotoStep4();" *ngIf="step==3">
+                    Next
+                </button>
+                <button class="next_button" (click)="finish();" *ngIf="step==4">
+                    Finish
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>

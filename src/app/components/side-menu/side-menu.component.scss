@@ -1,0 +1,35 @@
+ .sidenav-container {
+    height: 100%;
+    z-index: 20;
+  }
+  
+  .sidenav {
+    width: 200px;
+    background-color: #25374a; 
+    color: lightgray;
+  }
+  .mat-nav-list .mat-list-item {
+    color: lightgray;
+    font-size : 20px;
+    margin-left: 20px;
+    
+  }
+
+  .mat-nav-list .mat-list-item:focus {
+    background-color: #1d2b3a;
+  }
+  .focus {
+    background-color: #1d2b3a;
+  }
+
+  .mat-toolbar.mat-primary {
+    position: sticky;
+    background-color: #25374a;
+    top: 0;
+  }
+  
+  .res_logo {
+    width: 80px;
+    margin : 20px 60px 10px 60px;
+    border-radius: 50%;
+  }

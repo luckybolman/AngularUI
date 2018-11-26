@@ -1,0 +1,156 @@
+.background-main {
+  background-color : #1d2b3a;
+}
+.col-2 {
+  font-size : 15px;
+}
+.portfolio_logo{
+  width: 150px;
+  margin-left : auto;
+  margin-right : auto;
+}
+.restort_msg {
+  font-size : 22px;
+  color : lightgray;
+  margin-bottom : 50px;
+}
+.col-2{
+  color : lightgray;
+  font-weight:  bold;
+}
+.common-table{
+  margin: 10px 30px 10px 30px;
+  font-size : 15px;
+  font-weight: 100;
+  text-align: center;
+  color : lightgray;
+  thead{
+    background-color : #1c2733;
+    th{
+      padding : 10px;
+    }
+  }
+  tbody {
+    tr {
+      
+      background-color: #2a3744;
+      
+    }
+  }
+}
+
+.btc_bottom {
+  border-bottom: #FF9900 4px solid;
+}
+.eth_bottom{
+  border-bottom: #1F407A 4px solid;
+}
+.ltc_bottom{  
+  border-bottom: #b8b8b8 4px solid;
+}
+.molk_bottom{
+  border-bottom: #ee1d23 4px solid;
+}
+
+.common-table {
+  margin-top: 24px;
+  thead {
+    border-bottom: 1px solid #ccc;
+    .sort-icon {
+      display: inline-block;
+      padding-left: 5px;
+      width: 16px;
+      height: 16px;
+    }
+    .sorting::after, .sorting_asc::after, .sorting_desc::after {
+      content : '';
+    }
+    // .sorting { background: url('http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_both.png') no-repeat center right; }
+    .sorting_asc { background: url('http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_asc.png') no-repeat center right; }
+    .sorting_desc { background: url('http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_desc.png') no-repeat center right; }
+    .sorting_asc_disabled { background: url('http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_asc_disabled.png') no-repeat center right; }
+    .sorting_desc_disabled { background: url('http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_desc_disabled.png') no-repeat center right; }
+    tr th {
+      line-height: 14px;
+      font-size: 13px;
+      text-align : center;
+      color: lightgray;
+      // font-weight: 100;
+      padding-bottom: 8px;
+      cursor: pointer
+    }
+    tr th.selected {
+      position: relative;
+      font-weight: bold;
+      color: white;
+    }
+    tr th.selected span {
+      position: absolute;
+      top: 1px;
+      right: -16px
+    }
+    tbody {
+      tr {
+        height: 29px;
+        border-bottom: 3px solid #e7ebf1;
+        cursor: pointer !important;
+        td {
+          line-height: 25px;
+          font-size: 13px;
+          text-align : center;
+          padding : 15px;
+        }
+        td:first-child, td:nth-child(2) {
+          text-align: left
+        }
+        td:first-child a {
+          color: #dddddd;
+        }
+        td:first-child a:hover {
+          color: #dddddd
+        }
+      }
+      tr:last-child {
+        border-color: #ccc
+      }
+      tr:hover {
+        background-color: rgba(0, 132, 212, .08);
+        td:first-child a {
+          text-decoration: underline
+        }
+      }
+            
+    } 
+    
+  }
+}
+
+.portfolio_panel {
+  width : 240px;
+  height : 240px;
+  border-radius: 120px;
+  background-color : #1d2b3a;
+  left : calc(50% - 128px);
+  top : 110px;
+  border : 1px solid white;
+  position : absolute;
+  text-align: center;
+  color :white;
+  font-weight: bold;
+  padding-top : 100px;
+}
+
+
+.link {
+  color :rgb(3, 71, 189);
+  border-bottom: #1F407A 1px solid
+}
+.input-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.input-full-width {
+  width: 100%;
+}

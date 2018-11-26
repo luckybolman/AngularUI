@@ -1,0 +1,38 @@
+.background-main {
+    background-color : #1d2b3a;
+}
+
+
+.bg-toggle {
+    // background-image: linear-gradient(#1d2b3a,#395574);
+    background-color : #16212e;
+    border-top : rgb(75, 75, 75) solid 1px;
+    border-bottom : rgb(75, 75, 75) solid 1px;
+}
+.bg-toggle-1 {
+    background-color : #16212e;
+}
+.bg-toggle-hover {
+    background-image : linear-gradient(#1d2b3a,#395574);
+    border-top : rgb(75, 75, 75) solid 1px;
+    border-bottom : rgb(75, 75, 75) solid 1px;
+}
+.bg-toggle-button {
+    width: 100%;
+    text-align: left;
+    border-radius: 10px;
+    background-color : #0e151d;
+}
+.btn-interval {
+    color : white;
+    background-color: #6c7c8d;
+    line-height:  18px;
+    margin : 10px 0;
+}
+.bg-interval {
+    background-color: #6c7c8d;
+    color : white;
+    li {
+        padding :0 10px;
+    }
+}

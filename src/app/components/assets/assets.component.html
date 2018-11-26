@@ -1,0 +1,63 @@
+<div class="d-flex background-main">
+  <div style="width: 200px;">
+     <app-side-menu name="assets"></app-side-menu>
+  </div>
+  <div class="w-100 align-self-stretch text-info" style="margin-left:50px;">
+    <div class="show_hide">
+      Show/Hide
+    </div>
+    <div class="description">
+      Disabled assets are hidden in Mobilink. To hide an asset it must have a 0 balance. Because the exchange 
+      requires a minium of two assets, Bitcoin and Ethereum must remain on.
+    </div>
+    <div style="text-align:center;">
+        <input type="text" class="input_password" id="password" [(ngModel)] = "coinTitle" 
+        placeholder="Search for assets..." (keyup)="searchCoin()">
+    </div>
+    <div class="coin_group">
+        <div *ngFor="let coinItem of showCoinData;let i = index" class="coin_item" >
+            <div *ngIf="coinItem.item_clicked" class="check_item" (click)="additionChanged(i);">
+              <i class="fa fa-check-square"></i>
+            </div>
+            <div *ngIf="!coinItem.item_clicked" class="check_item" (click)="additionChanged(i);">
+              <i class="fa fa-square"></i>
+            </div>
+            <div class="coin_content" [ngStyle]="{'border-color':coinItem.color}">
+              <div class="coin_header" *ngIf="!coinItem.item_clicked">
+                  <img src={{coinItem.icon}} class="item_icon">
+                  <div class="item_header">
+                      <div class="item_title">
+                        {{coinItem.coin_name}}
+                      </div>
+    
+                      <div class="item_unit">
+                        {{coinItem.coin_unit}}
+                      </div>
+                      
+                    </div> 
+              </div>
+
+              <div class="coin_header" *ngIf="coinItem.item_clicked" [ngStyle]="{'background-color':'#1b2c42'}">
+                <img src={{coinItem.icon}} class="item_icon">
+                <div class="item_header">
+                  <div class="item_title">
+                    {{coinItem.coin_name}}
+                  </div>
+
+                  <div class="item_unit">
+                    {{coinItem.coin_unit}}
+                  </div>
+                </div> 
+              </div>
+             
+              <div class="item_content">
+                  <!-- <div style="justify-content: center;align-items: center;margin-top: 10px;"> -->
+                      {{coinItem.coin_description}}
+                  <!-- </div> -->
+              </div>
+            </div>
+        </div>
+    </div>
+      
+  </div>
+</div>

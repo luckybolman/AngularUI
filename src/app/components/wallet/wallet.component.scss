@@ -1,0 +1,160 @@
+.background-main {
+    background-color : #1d2b3a;
+}
+
+
+nav{
+    margin-top: 30%;
+    ul{
+        list-style-type: none;
+        li{
+            margin-bottom: 20%;
+            margin-top: 20%;
+            color : lightgray;
+        }
+
+    }
+}
+
+.coin_title {
+    font-size: 20px;
+    text-align: right;
+}
+
+.coin_title:hover {
+    color: white;
+}
+
+.btc_title {
+    font-size: 20px;
+    text-align: right;
+    background: transparent;
+    color: lightgray;
+}
+
+.btc_title:hover {
+    color: white;
+}
+
+.btc_title:active {
+    color: #ea9914;
+}
+
+.coin_amount {
+    font-size: 16px;
+    text-align: right;
+}
+
+.coin_logo {
+    width: 80px;
+    text-align: center;
+    margin-top:20px;
+}
+
+.main_content {
+    width:200px;
+    text-align: center;
+}
+
+.main_btn {
+    width:220px;
+    border-radius: 40px;
+    height:46px;
+    color:white;
+    font-size: 20px;
+    border:none;
+    margin-right:20px;
+
+}
+
+.modal_button {
+    width:220px;
+    border-radius: 40px;
+    height:46px;
+    color:white;
+    font-size: 20px;
+    border:none;
+    margin-bottom: 1px;
+}
+
+.modal_button:hover {
+    width:222px;
+    height: 47px;
+    margin-bottom: 0px;
+}
+
+.modal_button:focus {
+    outline: none;
+}
+
+.main_btn:hover{ 
+    width:222px;
+    height: 47px;
+    margin-right:18px;
+}
+
+.main_btn:focus {
+    outline: none;
+}
+
+.close_button {
+   width:15px;
+   float:right;
+   margin-right: 10px;
+   margin-top: 10px;
+}
+
+.btc_address {
+    position: absolute;
+    top: 35%;
+    margin: 0 auto;
+    width:300px;
+    height:30px;
+    background-color: black;
+}
+
+.address_title {
+    position: absolute;
+    top: 30%;
+    margin:0 auto;
+    color: white;
+}
+
+.input-form {
+    width: 390px;
+    margin-left: 10px;
+    .input-full-width{
+        width:390px;
+        .usd-text {
+            font-size : 25px;
+            color: white;
+        }
+
+        .btc-text {
+            font-size : 25px;
+            border-bottom: 2px solid;
+        }
+    }
+    
+}
+
+
+.modal-body {
+    background-color: #1d2b3a;
+}
+
+.copy_icon {
+    width:45px;
+    opacity: 0.6;
+}
+
+.copy_icon:hover {
+    opacity: 1;
+}
+
+.qr_code {
+    background-color: #1d2b3a;
+    text-align: center;
+    padding-bottom: 30px;
+    padding-top: 30px;
+}

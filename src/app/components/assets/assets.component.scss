@@ -1,0 +1,102 @@
+.background-main {
+    background-color : #1d2b3a;
+    .show_hide {
+        font-size: 50px;
+        color: white;
+    }
+
+    .description{
+        font-size: 18px;
+        color: lightgray;
+        margin-right: 30px;
+    }
+
+    .input_password {
+        width: 80%;
+        height: 45px;
+        font-size: 27px;
+        color: white;
+        background-color: #091522;
+        border:1px solid #091522;
+        border-radius: 10px;
+        margin-top: 30px;
+        padding-left: 20px;
+        text-align: left;
+    }
+
+    .input_password:focus {
+        outline: none;
+    }
+
+    .coin_item {
+        text-align: left;  
+        width: 100%;
+        height: 100px;
+    }
+
+    .check_item {
+        text-align: left;
+        font-size: 30px;
+        display: inline-block;
+        color: rgb(255, 255, 255);
+        opacity: 0.7;
+    }
+
+    .check_item:hover {
+        opacity: 1;
+    }
+
+    .coin_content {
+        width: calc(100% - 100px);
+        height: 90px;
+        margin-left: 20px;
+        background-color: #25374e;
+        border-bottom: 2px solid;
+        display: inline-block;
+    }
+
+    .coin_group {
+        text-align: left;
+        margin-top: 30px;
+    }
+
+    .coin_header {
+        width: 25%;
+        height: 88px;
+        text-align: left;
+        display: inline-block;  
+    }
+
+    .item_icon {
+        width: 40px;
+        text-align: left;
+        margin-top:-30px;
+        margin-left:15px;
+        display: inline-block;
+    }
+
+    .item_header {
+        width:100px;
+        margin-left:10px;
+        display: inline-block;
+    }
+
+    .item_title {
+        color: white;
+        font-size: 18px;
+        margin-top: 20px;
+    }
+
+    .item_unit {
+        color: lightgray;
+        font-size: 18px;
+    }
+
+    .item_content {
+        width: calc(75% - 70px);   
+        font-size:15px;
+        margin-left: 20px;
+        color: white;
+        display: inline-block;
+    }
+}

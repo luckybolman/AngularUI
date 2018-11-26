@@ -1,0 +1,174 @@
+
+$primary-gradient-color-1: rgb(255, 7, 255);
+$secondary-gradient-color-2:  #1d2b3a;
+@keyframes spin { 
+    100% { 
+        transform: rotateZ(360deg); 
+    }
+}
+.background-main {
+    background-color : #1d2b3a;
+}
+.bg-toggle {
+    // background-image: linear-gradient(#1d2b3a,#395574);
+    background-color : #16212e;
+    border-top : rgb(75, 75, 75) solid 1px;
+    border-bottom : rgb(75, 75, 75) solid 1px;
+}
+.bg-toggle-1 {
+    background-color : #16212e;
+}
+.bg-toggle-hover {
+    background-image : linear-gradient(#1d2b3a,#395574);
+    border-top : rgb(75, 75, 75) solid 1px;
+    border-bottom : rgb(75, 75, 75) solid 1px;
+}
+.bg-circle {
+    position: relative;
+    margin-top : 50px;
+    margin-left : auto;
+    margin-right : auto;
+    width : 240px;
+    height : 240px;
+    border-radius: 120px;
+    text-align: center;
+    color :white;
+    font-weight: bold;
+    padding-top : 60px;
+}
+.bg-circle:after{
+    position: absolute;
+    left : 0;
+    top : 0;
+    content: '';
+    height: 100%; 
+    width: 100%; 
+    border-radius: inherit;
+    animation: spin 2s linear infinite;
+    background-color: $primary-gradient-color-1;
+    background-image: linear-gradient(to right bottom, $primary-gradient-color-1 0%, $secondary-gradient-color-2 100%);
+    z-index: 1;
+}
+.bg-circle:before{
+    position: absolute;
+    left : 5px;
+    top : 5px;
+    content: '';
+    height: calc(100% - 10px); 
+    width: calc(100% - 10px); 
+    border-radius: inherit;
+    background-color: #1d2b3a;
+    z-index: 2;
+}
+.content-wrapper {
+    padding-top : 60px;
+    position: absolute;
+    height: 100%; 
+    width: 100%; 
+    left : 0;
+    top : 0;
+    overflow: hidden;
+    z-index: 3;
+}
+.bg-circle-disable {
+    margin-top : 50px;
+    margin-left : auto;
+    margin-right : auto;
+    width : 240px;
+    height : 240px;
+    border-radius: 120px;
+    text-align: center;
+    color :grey;
+    font-weight: bold;
+    padding-top : 60px;
+}
+.text-lightgrey {
+    color : lightgrey;
+}
+
+.btc-text {
+  color: #FF9900;
+  font-size : 25px;
+}
+.usd-text {
+    color: white;
+    font-size : 25px;
+}
+.eth-text {
+    color: #7d8fe8;
+    font-size : 25px;
+}
+.bg-spray {
+    background-image : linear-gradient(to right, #1d2b3a,#395574,#1d2b3a);
+}
+.bg-toggle-button {
+    width: 100%;
+    text-align: left;
+    border-radius: 10px;
+    background-color : #0e151d;
+}
+.eth-button {
+    border : #7d8fe8 2px solid;
+    background-color : #0e151d;
+}
+.btn_exchange {
+    background: transparent;
+    width : 300px;
+    font-size : 25px;
+    padding : 5px;
+    border : #658cb9 2px solid;
+    margin : 50px 0;
+    border-radius : 30px;
+    color : lightgrey;
+}
+.btn_end {
+    background: transparent;
+    width : 200px;
+    font-size : 25px;
+    padding : 5px;
+    border : #658cb9 2px solid;
+    margin : 10px;
+    border-radius : 30px;
+    color : lightgrey;
+}
+.btn_exchange_disable {
+    background: transparent;
+    width : 300px;
+    font-size : 25px;
+    padding : 5px;
+    border : #30435a 2px solid;
+    margin : 50px 0;
+    border-radius : 30px;
+    color : grey;
+}
+.btn_error {
+    margin-top : 20px;
+    width : 80%;
+    font-size : 20px;
+    color : white;
+    background-color : #902312;
+    border : #F02354 1px solid;
+    line-height: 30px;
+}
+ .input-form {
+     min-width: 150px;
+     max-width: 500px;
+     width: 100%;
+ }
+ 
+ .input-full-width {
+     width: 100%;
+ }
+ .btn-pill {
+     background: transparent;
+     border : grey 2px solid;
+     color : grey;
+     font-weight: bold;
+     font-size : 15px;
+     line-height: 20px;
+     padding-left: 30px;
+     padding-right : 30px;
+ }
+ .mt-6 {
+     margin-top : 40px;
+ }
