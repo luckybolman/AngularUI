@@ -85,7 +85,7 @@ export class HomeComponent implements OnInit {
     
     this.portfolios = [
       {
-        img_url : "./assets/btc_logo.png",
+        img_url : "./assets/BTC_Logo.png",
         name : 'Bitcoin',
         market : 'bitcoin',
         symbol : 'BTC',
@@ -111,7 +111,7 @@ export class HomeComponent implements OnInit {
         portfolio : 0
       },
       {
-        img_url : "./assets/ltc_logo.png",
+        img_url : "./assets/LTC_Logo.png",
         name : 'Litecoin',
         market : 'litecoin',
         symbol : 'LTC',
@@ -124,7 +124,7 @@ export class HomeComponent implements OnInit {
         portfolio : 0
       },
       {
-        img_url : "./assets/molk_logo.png",
+        img_url : "./assets/MOLK_Logo.png",
         name : 'Mobilink',
         market : 'mobilinktoken',
         symbol : 'MOLK',

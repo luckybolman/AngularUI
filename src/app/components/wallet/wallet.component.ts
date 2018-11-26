@@ -25,7 +25,7 @@ export class WalletComponent implements OnInit {
     this.selectedCoin = coin;
     if(coin=='BTC') {
       this.buttonColor = '#ea9914';
-      this.selectedIcon = "./assets/btc_logo.png";
+      this.selectedIcon = "./assets/BTC_Logo.png";
       this.selectedAddress = "14fwCjcRCNURzdQ38xfaHYgbFoQg6r6rA3";
       
     }
@@ -36,12 +36,12 @@ export class WalletComponent implements OnInit {
     }
     else if(coin=='LTC') {
       this.buttonColor = "#989898";
-      this.selectedIcon = "./assets/ltc_logo.png";
+      this.selectedIcon = "./assets/LTC_Logo.png";
       this.selectedAddress = "LeGVDmXa8Bd7sQatSKe5ED6NvLZuGSJqq6";
     }
     else if(coin=='MOLK') {
       this.buttonColor = "#153281";
-      this.selectedIcon = "./assets/molk_logo.png";
+      this.selectedIcon = "./assets/MOLK_Logo.png";
       this.selectedAddress = "0x58D578B212dbD983e649d506F3436ecb07a09dF6";
     }
     this.qrCodeAddress = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data="+this.selectedAddress;

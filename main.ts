@@ -20,7 +20,7 @@ function createWindow() {
     minWidth: 1200,
     minHeight: 800,    
     backgroundColor: '#1d2b3a',
-    icon: path.join(__dirname, 'dist/assets/molk_logo.png')
+    icon: path.join(__dirname, 'dist/assets/MOLK_Logo.png')
   });
 
   win.setMenu(null);

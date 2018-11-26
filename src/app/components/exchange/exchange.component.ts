@@ -25,7 +25,7 @@ export class ExchangeComponent implements OnInit {
   coin_data = [
     { 
       buttonColor : '#ea9914',
-      selectedIcon : "./assets/btc_logo.png",
+      selectedIcon : "./assets/BTC_Logo.png",
       name : 'BTC',
       long : 'Bitcoin',
       balance : 0.4,
@@ -47,7 +47,7 @@ export class ExchangeComponent implements OnInit {
     },
     {
       buttonColor : '#989898',
-      selectedIcon : "./assets/ltc_logo.png",
+      selectedIcon : "./assets/LTC_Logo.png",
       name : 'LTC',
       long : 'Litecoin',
       balance : 0,
@@ -58,7 +58,7 @@ export class ExchangeComponent implements OnInit {
     },
     {
       buttonColor : '#ea7070',
-      selectedIcon : "./assets/molk_logo.png",
+      selectedIcon : "./assets/MOLK_Logo.png",
       name : 'MOLK',
       long : 'MobilinkToken',
       balance : 2000,
