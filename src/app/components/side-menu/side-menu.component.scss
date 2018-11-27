@@ -33,3 +33,54 @@
     margin : 20px 60px 10px 60px;
     border-radius: 50%;
   }
+
+  .close_button {
+    width:15px;
+    float:right;
+    margin-right: 10px;
+    margin-top: 10px;
+  }
+  
+  .modal-body {
+    background-color: #1d2b3a;
+    color: #eee;
+  }
+
+  .login-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+
+  .input-form {
+    width: 100%;
+    color: #ccc;
+    border-color:#eee;
+    .input-full-width{
+      width: 100%;
+      margin-bottom: 30px;
+      padding: 10px;
+      background-color: #141414;
+    }
+  }
+
+  .login-button,
+  .register-button {
+    margin-top: 15px;
+    display: inline-block;
+    background-color: rgb(45, 92, 131);
+    width: 120px;
+    text-align: center;
+    padding: 10px;
+    &:hover { 
+      background-color: steelblue;
+    }
+
+    &:action { 
+      background-color: rgb(5, 10, 14);
+    }
+  }
+
+  .register-button {
+    float: right;
+  }

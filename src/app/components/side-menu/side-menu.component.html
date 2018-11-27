@@ -1,51 +1,100 @@
-<mat-sidenav-container class='sidenav-container'>
-  <mat-sidenav
-  #drawer
-  class="sidenav"
-  fixedInViewport="true"
-  [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-  [mode]="(isHandset$ | async) ? 'over' : 'side'"
-  [opened]="!(isHandset$ | async)"
-  >
-    <mat-nav-list >
-      <img src="./assets/MOLK_Logo.png" alt="LOGO" class="res_logo">
-      <h2 style="text-align: center">MOBILINK</h2>
-      <h5 style="text-align: center">$0.00USD</h5>
-      <a mat-list-item routerLink=""  [ngClass]="pageName=='home'?'focus':''">
-        <i class="fa fa-pie-chart"></i>
-        &nbsp;&nbsp;Portfolio
-      </a>
-      <a mat-list-item routerLink="/wallet" [ngClass]="pageName=='wallet'?'focus':''">    
-        <i class="material-icons">account_balance_wallet</i>
-        &nbsp;&nbsp;Wallet
-      </a>
-      <a mat-list-item routerLink="/exchange" [ngClass]="pageName=='exchange'?'focus':''">  
-        <i class="fa fa-exchange"></i>
-        &nbsp;&nbsp;Exchange
-      </a>
-      <a mat-list-item routerLink="/backup" [ngClass]="pageName=='backup'?'focus':''">      
-        <i class="material-icons">backup</i>
-        &nbsp;&nbsp;Backup
-      </a>
-      <a mat-list-item routerLink="/chart" [ngClass]="pageName=='chart'?'focus':''">      
-        <i class="material-icons">show_chart</i>
-        &nbsp;&nbsp;Price Chart
-      </a>
-      <a mat-list-item routerLink="/assets" [ngClass]="pageName=='assets'?'focus':''">      
-        <i class="fa fa-plus-square"></i>
-        &nbsp;&nbsp; Assets
-      </a>
-      <div class="fixed-bottom">
-          <!-- <a mat-list-item href="/setting">      
-            <i class="fa fa-sliders"></i>
-            &nbsp;&nbsp;Setting
-          </a> -->
-          <a mat-list-item (click)="gotoHelp();">                 
-            <i class="fa fa-question-circle"></i>
-            &nbsp;&nbsp;Help
-          </a>
+<div class="d-flex background-main">
+  <ng-template #login let-modal>
+    <div style="background-color: #1d2b3a;">
+        <img src="./assets/close_button.png" class="close_button" (click)="modal.dismiss('Cross click')">
+    </div>
+    <div class="modal-body">
+      <h1 class="login-header"> Login </h1> 
+      <div style="padding: 10px 30px;">
+        <form class="input-form" >
+          <h5 style="margin: 15px 0px;">Username</h5>
+          <mat-form-field class="input-full-width">
+            <input matInput>
+          </mat-form-field>
+          <h5 style="margin: 15px 0px;">Password</h5>
+          <mat-form-field class="input-full-width">
+            <input matInput>
+          </mat-form-field>
+          <div class="login-button"> Login </div>
+          <div class="register-button" (click)="openModal(register); modal.dismiss('Cross click');"> Register </div>
+        </form>
       </div>
-    
-    </mat-nav-list>
-  </mat-sidenav>
-</mat-sidenav-container>
+    </div>
+  </ng-template>
+  <ng-template #register let-modal>
+    <div style="background-color: #1d2b3a;">
+        <img src="./assets/close_button.png" class="close_button" (click)="modal.dismiss('Cross click')">
+    </div>
+    <div class="modal-body">
+      <h1 class="login-header"> Register </h1> 
+      <div style="padding: 10px 30px;">
+        <form class="input-form" >
+          <h5 style="margin: 15px 0px;">Email</h5>
+          <mat-form-field class="input-full-width">
+            <input matInput>
+          </mat-form-field>
+          <h5 style="margin: 15px 0px;">Username</h5>
+          <mat-form-field class="input-full-width">
+            <input matInput>
+          </mat-form-field>
+          <h5 style="margin: 15px 0px;">Password</h5>
+          <mat-form-field class="input-full-width">
+            <input matInput>
+          </mat-form-field>
+          <div class="login-button"> Register </div>
+        </form>
+      </div>
+    </div>
+  </ng-template>
+  <mat-sidenav-container class='sidenav-container'>
+    <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport="true"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="!(isHandset$ | async)"
+    >
+      <mat-nav-list >
+        <img src="./assets/MOLK_Logo.png" alt="LOGO" class="res_logo">
+        <h2 style="text-align: center">MOBILINK</h2>
+        <h5 style="text-align: center">$0.00USD</h5>
+        <a mat-list-item routerLink=""  [ngClass]="pageName=='home'?'focus':''">
+          <i class="fa fa-pie-chart"></i>
+          &nbsp;&nbsp;Portfolio
+        </a>
+        <a mat-list-item routerLink="/wallet" [ngClass]="pageName=='wallet'?'focus':''">    
+          <i class="material-icons">account_balance_wallet</i>
+          &nbsp;&nbsp;Wallet
+        </a>
+        <a mat-list-item routerLink="/exchange" [ngClass]="pageName=='exchange'?'focus':''">  
+          <i class="fa fa-exchange"></i>
+          &nbsp;&nbsp;Exchange
+        </a>
+        <a mat-list-item routerLink="/backup" [ngClass]="pageName=='backup'?'focus':''">      
+          <i class="material-icons">backup</i>
+          &nbsp;&nbsp;Backup
+        </a>
+        <a mat-list-item routerLink="/chart" [ngClass]="pageName=='chart'?'focus':''">      
+          <i class="material-icons">show_chart</i>
+          &nbsp;&nbsp;Price Chart
+        </a>
+        <a mat-list-item routerLink="/assets" [ngClass]="pageName=='assets'?'focus':''">      
+          <i class="fa fa-plus-square"></i>
+          &nbsp;&nbsp; Assets
+        </a>
+        <div class="fixed-bottom">
+            <!-- <a mat-list-item href="/setting">      
+              <i class="fa fa-sliders"></i>
+              &nbsp;&nbsp;Setting
+            </a> -->
+            <a mat-list-item (click)="openModal(login)">                 
+              <i class="fa fa-lock"></i>
+              &nbsp;&nbsp;Login
+            </a>
+        </div>
+      
+      </mat-nav-list>
+    </mat-sidenav>
+  </mat-sidenav-container>
+</div>

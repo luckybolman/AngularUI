@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
+import { NgbActiveModal, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -16,7 +17,7 @@ export class SideMenuComponent implements OnInit {
       map(result => result.matches)
     );
   @Input('name') pageName: string;
-  constructor(private breakpointObserver: BreakpointObserver, private route : Router) { }
+  constructor(private breakpointObserver: BreakpointObserver, private route : Router, private modalService: NgbModal) { }
 
   ngOnInit() {
     
@@ -25,6 +26,10 @@ export class SideMenuComponent implements OnInit {
 
   gotoHelp(){
     require('electron').shell.openExternal("www.mobilink.io");
+  }
+
+  openModal(content){
+    this.modalService.open(content, { centered: true });
   }
 
 }
