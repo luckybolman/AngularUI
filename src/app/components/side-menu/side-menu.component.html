@@ -9,13 +9,13 @@
         <form class="input-form" >
           <h5 style="margin: 15px 0px;">Username</h5>
           <mat-form-field class="input-full-width">
-            <input matInput>
+            <input #loginUsername matInput>
           </mat-form-field>
           <h5 style="margin: 15px 0px;">Password</h5>
           <mat-form-field class="input-full-width">
-            <input matInput>
+            <input #loginPassword matInput type="password">
           </mat-form-field>
-          <div class="login-button"> Login </div>
+          <div class="login-button" (click)="onLogin(loginUsername.value, loginPassword.value)"> Login </div>
           <div class="register-button" (click)="openModal(register); modal.dismiss('Cross click');"> Register </div>
         </form>
       </div>
@@ -31,17 +31,17 @@
         <form class="input-form" >
           <h5 style="margin: 15px 0px;">Email</h5>
           <mat-form-field class="input-full-width">
-            <input matInput>
+            <input #registerEmail matInput>
           </mat-form-field>
           <h5 style="margin: 15px 0px;">Username</h5>
           <mat-form-field class="input-full-width">
-            <input matInput>
+            <input #registerUsername matInput>
           </mat-form-field>
           <h5 style="margin: 15px 0px;">Password</h5>
           <mat-form-field class="input-full-width">
-            <input matInput>
+            <input #registerPassword matInput type="password">
           </mat-form-field>
-          <div class="login-button"> Register </div>
+          <div class="login-button" (click)="onRegister(registerUsername.value, registerEmail.value, registerPassword.value)"> Register </div>
         </form>
       </div>
     </div>
@@ -57,8 +57,8 @@
     >
       <mat-nav-list >
         <img src="./assets/MOLK_Logo.png" alt="LOGO" class="res_logo">
-        <h2 style="text-align: center">MOBILINK</h2>
-        <h5 style="text-align: center">$0.00USD</h5>
+        <h2 style="text-align: center; margin-bottom: 20px;">MOBILINK</h2>
+        <h5 style="text-align: center; height: 25px;">{{sUsername}}</h5>
         <a mat-list-item routerLink=""  [ngClass]="pageName=='home'?'focus':''">
           <i class="fa fa-pie-chart"></i>
           &nbsp;&nbsp;Portfolio
@@ -89,8 +89,8 @@
               &nbsp;&nbsp;Setting
             </a> -->
             <a mat-list-item (click)="openModal(login)">                 
-              <i class="fa fa-lock"></i>
-              &nbsp;&nbsp;Login
+              <i [ngClass]="bLogined?'fa fa-unlock':'fa fa-lock'"></i>
+              &nbsp;&nbsp;{{sLoginLabel}}
             </a>
         </div>
       
