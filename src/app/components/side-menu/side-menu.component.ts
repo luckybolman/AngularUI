@@ -38,7 +38,11 @@ export class SideMenuComponent implements OnInit {
   }
 
   openModal(content){
-    this.modalService.open(content, { centered: true });
+    if(this.userInfo.bLogined) {
+      this.onLogout();
+    } else {
+      this.modalService.open(content, { centered: true });
+    }
   }
 
   closeModal() {
@@ -92,12 +96,7 @@ export class SideMenuComponent implements OnInit {
   }
 
   onLogout() {
-    this.http.get('http://localhost:8000/user/logout?username=' + this.userInfo.username)
-    .subscribe(
-      data => {
-        let res:any = data;
-        this.setLoginFlag('', res.status);
-        console.log(res);
-    });
+    this.http.get('http://localhost:8000/user/logout?username=' + this.userInfo.username).subscribe();
+    this.setLoginFlag('', '');
   }
 }
