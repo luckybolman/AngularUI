@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 
 import {
   MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule, MatSelectModule,
-  MatFormFieldModule, MatInputModule, MatButtonToggleModule, MatDatepickerModule
+  MatFormFieldModule, MatInputModule, MatButtonToggleModule, MatDatepickerModule, MatSnackBarModule
 } from '@angular/material';
 
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -30,6 +30,7 @@ import { SideMenuComponent } from './components/side-menu/side-menu.component';
 import { ExchangeComponent } from './components/exchange/exchange.component';
 import { WalletComponent } from './components/wallet/wallet.component';
 import { BackupComponent } from './components/backup/backup.component';
+import { UserInfo } from './components/userinfo';
 
 import { DataTablesModule } from 'angular-datatables';
 import  { HighchartsChartModule} from 'highcharts-angular';
@@ -37,6 +38,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import { ChartComponent } from './components/chart/chart.component';
 import { AssetsComponent } from './components/assets/assets.component';
+
+import { ToastModule } from 'primeng/toast';
+import { ButtonModule } from 'primeng/button';
+import { AccordionModule } from 'primeng/primeng';
+import { PanelModule } from 'primeng/primeng';
+import { RadioButtonModule } from 'primeng/primeng';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -57,7 +64,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   imports: [
     HighchartsChartModule,
-    BrowserModule,
+    ButtonModule,
     DataTablesModule,
     BrowserAnimationsModule,
     FormsModule,
@@ -70,9 +77,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatInputModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatInputModule,
+    MatSnackBarModule,
     BsDropdownModule.forRoot(),
     NgbModule.forRoot(),
+    AccordionModule,
+    BrowserModule,
+    PanelModule,
+    RadioButtonModule,
+    ToastModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -81,7 +93,10 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     })
   ],
-  providers: [ElectronService],
+  exports : [
+    SideMenuComponent
+  ],
+  providers: [ElectronService, UserInfo],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
