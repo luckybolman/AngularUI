@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { UserInfo } from '../userinfo';
 
 @Component({
   selector: 'app-side-menu',
@@ -15,12 +16,13 @@ export class SideMenuComponent implements OnInit {
   bLogined : boolean = false;
   sLoginLabel: string = "Login";
   sUsername: string = "";
-
+  
   constructor(
     private breakpointObserver: BreakpointObserver, 
     private route : Router, 
     private modalService: NgbModal,
     private http : HttpClient,
+    private userInfo: UserInfo
   ) { }
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -53,9 +55,13 @@ export class SideMenuComponent implements OnInit {
       this.closeModal();
       this.bLogined = true;
       this.sLoginLabel = "Logout";
+      this.userInfo.bLogined = true;
+      this.userInfo.username = username;
     } else {
       this.bLogined = false;
       this.sLoginLabel = "Login";
+      this.userInfo.bLogined = false;
+      this.userInfo.username = '';
     }
   }
 
