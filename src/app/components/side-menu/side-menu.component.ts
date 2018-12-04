@@ -13,16 +13,13 @@ import { UserInfo } from '../userinfo';
   styleUrls: ['./side-menu.component.scss']
 })
 export class SideMenuComponent implements OnInit {
-  bLogined : boolean = false;
-  sLoginLabel: string = "Login";
-  sUsername: string = "";
   
   constructor(
     private breakpointObserver: BreakpointObserver, 
     private route : Router, 
     private modalService: NgbModal,
     private http : HttpClient,
-    private userInfo: UserInfo
+    public userInfo: UserInfo
   ) { }
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -49,17 +46,11 @@ export class SideMenuComponent implements OnInit {
   }
 
   setLoginFlag(username:string, flag: string) {
-    this.sUsername = username;
-
     if(flag == 'SUCCESS') {
       this.closeModal();
-      this.bLogined = true;
-      this.sLoginLabel = "Logout";
       this.userInfo.bLogined = true;
       this.userInfo.username = username;
     } else {
-      this.bLogined = false;
-      this.sLoginLabel = "Login";
       this.userInfo.bLogined = false;
       this.userInfo.username = '';
     }
@@ -76,8 +67,6 @@ export class SideMenuComponent implements OnInit {
         this.setLoginFlag(username, res.status);
         console.log(res);
     });
-    //var ret = this.http.get('http://localhost:8000/user/login?username=' + username + '&password=' + password);
-    //console.log(ret);
   }
 
   onRegister(username, email, password) {
@@ -103,7 +92,7 @@ export class SideMenuComponent implements OnInit {
   }
 
   onLogout() {
-    this.http.get('http://localhost:8000/user/logout?username=' + this.sUsername)
+    this.http.get('http://localhost:8000/user/logout?username=' + this.userInfo.username)
     .subscribe(
       data => {
         let res:any = data;
