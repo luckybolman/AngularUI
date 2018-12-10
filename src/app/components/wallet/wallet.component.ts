@@ -91,6 +91,15 @@ export class WalletComponent implements OnInit {
   clear() {
     this.messageService.clear();
   }
+
+  copyAddress() {
+    var icopy = document.createElement("input");
+    document.body.appendChild(icopy);
+    icopy.setAttribute('value', this.selectedAddress);
+    icopy.select();
+    document.execCommand("copy");
+    document.body.removeChild(icopy);
+  }
 }
 
 
