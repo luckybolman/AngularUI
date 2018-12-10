@@ -5,6 +5,7 @@ import { SideMenuComponent } from '../side-menu/side-menu.component';
 import { NgModule } from '@angular/core';
 import { UserInfo } from '../userinfo';
 import { MessageService } from 'primeng/api';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-wallet',
@@ -27,12 +28,14 @@ export class WalletComponent implements OnInit {
     private modalService: NgbModal,
     private userInfo: UserInfo,
     private snackBar: MatSnackBar,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private http : HttpClient
   ) {
    this.setCoin('BTC');
   }
 
   ngOnInit() {
+
   }
 
   setCoin(coin:string){
@@ -40,29 +43,34 @@ export class WalletComponent implements OnInit {
     if(coin=='BTC') {
       this.buttonColor = '#ea9914';
       this.selectedIcon = "./assets/BTC_Logo.png";
-      this.selectedAddress = "14fwCjcRCNURzdQ38xfaHYgbFoQg6r6rA3";
     }
     else if(coin=='ETH') {
       this.buttonColor = "#627eea";
       this.selectedIcon = "./assets/ethereum.png";
-      this.selectedAddress = "0x58D578B212dbD983e649d506F3436ecb07a09dF6";
     }
     else if(coin=='LTC') {
       this.buttonColor = "#989898";
       this.selectedIcon = "./assets/LTC_Logo.png";
-      this.selectedAddress = "LeGVDmXa8Bd7sQatSKe5ED6NvLZuGSJqq6";
     }
     else if(coin=='MOLK') {
       this.buttonColor = "#153281";
       this.selectedIcon = "./assets/MOLK_Logo.png";
-      this.selectedAddress = "0x58D578B212dbD983e649d506F3436ecb07a09dF6";
     }
-    this.qrCodeAddress = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data="+this.selectedAddress;
   }
 
   openModal(content){
     if(this.userInfo.bLogined) {
-      this.modalService.open(content, { centered: true });
+      this.http.get('http://localhost:8000/wallet/address?username=' + this.userInfo.username + '&coin=' + this.selectedCoin)
+      .subscribe(
+        data => {
+          let res:any = data;
+          if(res.status == "SUCCESS" && res.address != '')  {
+            this.selectedAddress = res.address;
+            this.qrCodeAddress = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data="+this.selectedAddress;
+            this.modalService.open(content, { centered: true });
+          }
+          console.log(res);
+      });
     } else {
       this.addSingle();
     }
