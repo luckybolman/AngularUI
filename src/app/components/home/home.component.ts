@@ -1,6 +1,5 @@
-import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input, OnDestroy } from '@angular/core';
 import { ElectronService} from '../../providers/electron.service';
-import 'datatables.net';
 import * as Highcharts from 'highcharts';
         
 import { NgbActiveModal, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
@@ -11,10 +10,9 @@ import { ApiService } from '../../api.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   isBackup : boolean = false;
   portfolios :  any[];
-  dataTable : any;
   total_price = 56.4;
   Highcharts = Highcharts; // required
   chartConstructor = 'chart'; // optional string, defaults to 'chart'
@@ -144,16 +142,14 @@ export class HomeComponent implements OnInit {
     },10000);       
 
     this.chRef.detectChanges();
-    this.dataTable = $('#portfolio_table');
-    this.dataTable.dataTable({
-      select: true,
-      destroy: true,
-      "paging":   false,
-      "info":     false,
-      "searching": false
-    });
-
   }
+
+  ngOnDestroy() {
+    // console.log("Leave page");
+    if(this.inteval){
+      clearInterval(this.inteval);
+    }
+  };
 
   getData(){
     for(let i=0;i<3;i++){
@@ -188,6 +184,7 @@ export class HomeComponent implements OnInit {
   openModal(content){
     this.modalService.open(content, { centered: true });
   }
+  
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
