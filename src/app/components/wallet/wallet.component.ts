@@ -21,6 +21,7 @@ export class WalletComponent implements OnInit {
   qrCodeAddress: string;
   sendingAmountC =0.00;
   sendingAmountU = 0.00;
+  walletBalance: any;
 
   @Input() sideMenuComponent: SideMenuComponent;
 
@@ -35,7 +36,13 @@ export class WalletComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.walletBalance = {
+      'BTC' : 0,
+      'ETH' : 0,
+      'LTC' : 0,
+      'MOBI' : 0,
+    }
+    this.getBalance();
   }
 
   setCoin(coin:string){
@@ -107,6 +114,23 @@ export class WalletComponent implements OnInit {
     icopy.select();
     document.execCommand("copy");
     document.body.removeChild(icopy);
+  }
+
+  getBalance() {
+    if(this.userInfo.bLogined) {
+      this.http.get('http://localhost:8000/wallet/balances?username=' + this.userInfo.username)
+      .subscribe(
+        data => {
+          let res:any = data;
+          if(res.status == "SUCCESS")  {
+            this.walletBalance['BTC'] = res.btc_balance;
+            this.walletBalance['ETH'] = res.eth_balance;
+            this.walletBalance['LTC'] = res.ltc_balance;
+            this.walletBalance['MOBI'] = res.mobi_balance;
+          }
+          console.log(res);
+      });
+    }
   }
 }
 
