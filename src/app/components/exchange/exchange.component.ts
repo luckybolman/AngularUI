@@ -28,8 +28,8 @@ export class ExchangeComponent implements OnInit {
       selectedIcon : "./assets/BTC_Logo.png",
       name : 'BTC',
       long : 'Bitcoin',
-      balance : 0.4,
-      rate : 6488.96,
+      balance : 0.00,
+      rate : 0.00,
       min : 0.013279,
       hover: false,
       hover1 : false,
@@ -39,8 +39,8 @@ export class ExchangeComponent implements OnInit {
       selectedIcon : "./assets/ethereum.png",
       name : 'ETH',
       long : 'Ethereum',
-      balance : 0.1,
-      rate : 204.38,
+      balance : 0.00,
+      rate : 0.00,
       min : 0.16698473,
       hover : false,
       hover1 : false,
@@ -50,8 +50,8 @@ export class ExchangeComponent implements OnInit {
       selectedIcon : "./assets/LTC_Logo.png",
       name : 'LTC',
       long : 'Litecoin',
-      balance : 0,
-      rate : 52.25,
+      balance : 0.00,
+      rate : 0.00,
       min : 0.64951131,
       hover : false,
       hover1 : false,
@@ -61,8 +61,8 @@ export class ExchangeComponent implements OnInit {
       selectedIcon : "./assets/MOLK_Logo.png",
       name : 'MOLK',
       long : 'MobilinkToken',
-      balance : 2000,
-      rate : 0.013846,
+      balance : 0.00,
+      rate : 0.00,
       min : 20,
       hover : false,
       hover1 : false,
@@ -97,9 +97,8 @@ export class ExchangeComponent implements OnInit {
     if(i!=this.sendCoin){
       this.receiveCoin = i;
     }
-    this.receivingAmountC = this.eraseZeros((parseFloat(this.sendingAmountC)*this.coin_rates[this.coin_data[this.sendCoin].name+this.coin_data[this.receiveCoin].name]).toFixed(8));
-    this.receivingAmountU = this.eraseZeros((parseFloat(this.receivingAmountC)*this.coin_data[this.receiveCoin].rate).toFixed(2));
-    
+    this.receivingAmountC = this.formalize((parseFloat(this.sendingAmountC)*this.coin_rates[this.coin_data[this.sendCoin].name+this.coin_data[this.receiveCoin].name]));
+    this.receivingAmountU = this.formalize((parseFloat(this.receivingAmountC)*this.coin_data[this.receiveCoin].rate));
   }
   updateReceiveC(){
     if(!this.receivingAmountU || !parseFloat(this.receivingAmountU)){
@@ -108,12 +107,10 @@ export class ExchangeComponent implements OnInit {
       this.sendingAmountC = '0.00';
       return;
     } 
-    this.receivingAmountC = this.eraseZeros((parseFloat(this.receivingAmountU)/this.coin_data[this.receiveCoin].rate).toFixed(8));
-    this.sendingAmountC = this.eraseZeros((parseFloat(this.receivingAmountC)/this.coin_rates[this.coin_data[this.sendCoin].name+this.coin_data[this.receiveCoin].name]).toFixed(8));
-    this.sendingAmountU = this.eraseZeros((parseFloat(this.sendingAmountC)*this.coin_data[this.sendCoin].rate).toFixed(2));
+    this.receivingAmountC = this.formalize((parseFloat(this.receivingAmountU)/this.coin_data[this.receiveCoin].rate));
+    this.sendingAmountC = this.formalize((parseFloat(this.receivingAmountC)/this.coin_rates[this.coin_data[this.sendCoin].name+this.coin_data[this.receiveCoin].name]));
+    this.sendingAmountU = this.formalize((parseFloat(this.sendingAmountC)*this.coin_data[this.sendCoin].rate);
     this.checkError();
-    
-    
   }
   updateReceiveU(){
     if(!this.receivingAmountC || !parseFloat(this.receivingAmountC)){
@@ -122,9 +119,9 @@ export class ExchangeComponent implements OnInit {
       this.sendingAmountC = '0.00'; 
       return;
     } 
-    this.receivingAmountU = this.eraseZeros((parseFloat(this.receivingAmountC)*this.coin_data[this.receiveCoin].rate).toFixed(2));
-    this.sendingAmountC = this.eraseZeros((parseFloat(this.receivingAmountC)/this.coin_rates[this.coin_data[this.sendCoin].name+this.coin_data[this.receiveCoin].name]).toFixed(8));
-    this.sendingAmountU = this.eraseZeros((parseFloat(this.sendingAmountC)*this.coin_data[this.sendCoin].rate).toFixed(2));
+    this.receivingAmountU = this.formalize((parseFloat(this.receivingAmountC)*this.coin_data[this.receiveCoin].rate));
+    this.sendingAmountC = this.formalize((parseFloat(this.receivingAmountC)/this.coin_rates[this.coin_data[this.sendCoin].name+this.coin_data[this.receiveCoin].name]));
+    this.sendingAmountU = this.formalize((parseFloat(this.sendingAmountC)*this.coin_data[this.sendCoin].rate));
     this.checkError();
     
   }
@@ -135,9 +132,9 @@ export class ExchangeComponent implements OnInit {
       this.receivingAmountU = '0.00'; 
       return;
     } 
-    this.sendingAmountC = this.eraseZeros((parseFloat(this.sendingAmountU)/this.coin_data[this.sendCoin].rate).toFixed(8));
-    this.receivingAmountC = this.eraseZeros((parseFloat(this.sendingAmountC)*this.coin_rates[this.coin_data[this.sendCoin].name+this.coin_data[this.receiveCoin].name]).toFixed(8));
-    this.receivingAmountU = this.eraseZeros((parseFloat(this.receivingAmountC)*this.coin_data[this.receiveCoin].rate).toFixed(2));
+    this.sendingAmountC = this.formalize((parseFloat(this.sendingAmountU)/this.coin_data[this.sendCoin].rate));
+    this.receivingAmountC = this.formalize((parseFloat(this.sendingAmountC)*this.coin_rates[this.coin_data[this.sendCoin].name+this.coin_data[this.receiveCoin].name]));
+    this.receivingAmountU = this.formalize((parseFloat(this.receivingAmountC)*this.coin_data[this.receiveCoin].rate));
     this.checkError();
   }
   updateSendU(){
@@ -147,9 +144,9 @@ export class ExchangeComponent implements OnInit {
       this.receivingAmountU = '0.00'; 
       return;
     } 
-    this.sendingAmountU = this.eraseZeros((parseFloat(this.sendingAmountC)*this.coin_data[this.sendCoin].rate).toFixed(2));
-    this.receivingAmountC = this.eraseZeros((parseFloat(this.sendingAmountC)*this.coin_rates[this.coin_data[this.sendCoin].name+this.coin_data[this.receiveCoin].name]).toFixed(8));
-    this.receivingAmountU = this.eraseZeros((parseFloat(this.receivingAmountC)*this.coin_data[this.receiveCoin].rate).toFixed(2));
+    this.sendingAmountU = this.formalize((parseFloat(this.sendingAmountC)*this.coin_data[this.sendCoin].rate));
+    this.receivingAmountC = this.formalize((parseFloat(this.sendingAmountC)*this.coin_rates[this.coin_data[this.sendCoin].name+this.coin_data[this.receiveCoin].name]));
+    this.receivingAmountU = this.formalize((parseFloat(this.receivingAmountC)*this.coin_data[this.receiveCoin].rate));
     this.checkError();
   }
 
@@ -159,17 +156,29 @@ export class ExchangeComponent implements OnInit {
   }
 
   setAllAmount(){
-    this.sendingAmountC = this.eraseZeros(this.coin_data[this.sendCoin].balance.toFixed(8));
+    this.sendingAmountC = this.formalize(this.coin_data[this.sendCoin].balance);
     this.updateSendU();
   }
   setHalfAmount(){
-    this.sendingAmountC = this.eraseZeros((this.coin_data[this.sendCoin].balance/2).toFixed(8));
+    this.sendingAmountC = this.formalize((this.coin_data[this.sendCoin].balance/2));
     this.updateSendU();
   }
   setMinAmount(){
-    this.sendingAmountC = this.eraseZeros((this.coin_data[this.sendCoin].min).toFixed(8));
+    this.sendingAmountC = this.formalize((this.coin_data[this.sendCoin].min));
     this.updateSendU();
   }
+
+  formalize(num : number){
+    let str = "" + num;
+    let index = str.indexOf('.');
+
+    if (index >= 0 && (str.length - index - 1) > 2) {
+      return this.eraseZeros(num.toFixed(8));
+    } else {
+      return num.toFixed(2);
+    }
+  }
+
   eraseZeros(num : string){
     return parseFloat(num).toString();
   }
@@ -194,5 +203,14 @@ export class ExchangeComponent implements OnInit {
     if(i!=this.receiveCoin)
     this.coin_data[i].hover1 = $event.type == 'mouseover';
   }
-
+  onClickComapreArrow() {
+    let index = this.sendCoin;
+    this.sendCoin = this.receiveCoin;
+    this.receiveCoin = index;
+    this.receivingAmountC = '0.00'; 
+    this.receivingAmountU = '0.00';
+    this.sendingAmountU = '0.00';
+    this.sendingAmountC = '0.00';
+    this.checkError();
+  } 
 }
