@@ -14,6 +14,8 @@ import { UserInfo } from '../userinfo';
 })
 export class SideMenuComponent implements OnInit {
   
+  errMessage: string = '';
+
   constructor(
     private breakpointObserver: BreakpointObserver, 
     private route : Router, 
@@ -49,14 +51,19 @@ export class SideMenuComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
-  setLoginFlag(username:string, flag: string) {
-    if(flag == 'SUCCESS') {
+  setLoginFlag(username:string, res: any) {
+    if(res.status == 'SUCCESS') {
       this.closeModal();
       this.userInfo.bLogined = true;
       this.userInfo.username = username;
+      this.errMessage = '';
     } else {
       this.userInfo.bLogined = false;
       this.userInfo.username = '';
+      if(res.msg) 
+        this.errMessage = res.msg; 
+      else 
+        this.errMessage = '';
     }
   }
 
@@ -67,9 +74,7 @@ export class SideMenuComponent implements OnInit {
     this.http.get('http://localhost:8000/user/login?username=' + username + '&password=' + password)
     .subscribe(
       data => {
-        let res:any = data;
-        this.setLoginFlag(username, res.status);
-        console.log(res);
+        this.setLoginFlag(username, data);
     });
   }
 
@@ -85,9 +90,7 @@ export class SideMenuComponent implements OnInit {
       })
       .subscribe(
         data => {
-          let res:any = data;
-          this.setLoginFlag(username, res.status);
-          console.log(res);
+          this.setLoginFlag(username, data);
         },
         error => {
             console.log("Error", error);
