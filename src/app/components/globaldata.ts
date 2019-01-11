@@ -31,6 +31,15 @@ export class CoinInfo {
     }
   }
 
+  getCheckedCoins() {
+    var validCoins = [];
+    for(let i=0; i<this.data.length; i++) {
+      if(this.data[i].checked)
+        validCoins.push(this.data[i]);
+    }
+    return validCoins;
+  }
+
   data = [
     {
       name:'Bitcoin',

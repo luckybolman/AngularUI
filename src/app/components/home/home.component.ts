@@ -94,7 +94,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     
-    this.portfolios = this.coinInfo.data;
+    this.portfolios = this.coinInfo.getCheckedCoins();
     
     this.getData();
     this.getMarketRate();

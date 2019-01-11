@@ -27,7 +27,7 @@ export class ExchangeComponent implements OnInit {
   // useFormControl = new FormControl('',[Validators.required,Validators.email]);
   errorMessage : string = '';
   ngOnInit() {
-    this.coin_data = this.coinInfo.data;
+    this.coin_data = this.coinInfo.getCheckedCoins();
   }
 
   setSendCoin(i : number) {

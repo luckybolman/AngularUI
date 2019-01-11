@@ -78,36 +78,12 @@
       <div style="width:200px;float:left;border-right:2px solid;padding-right:20px;" [ngStyle]="{'border-color':buttonColor}">
           <nav>
             <ul>
-              <li (click)="setCoin('BTC')">
+              <li role="menuitem"  *ngFor="let coin of coin_data; let i = index" (click)="setCoin(coin.symbol)">
                 <div class="btc_title">
-                  Bitcoin
+                  {{coin.name}}
                 </div>
                 <div class="coin_amount">
-                  0 BTC
-                </div>
-              </li>
-              <li (click)="setCoin('ETH')">
-                <div class="coin_title">
-                  Ethereum
-                </div>
-                <div class="coin_amount">
-                  0 ETH
-                </div>
-              </li>
-              <li (click)="setCoin('LTC')">
-                <div class="coin_title">
-                  Litecoin
-                </div>
-                <div class="coin_amount">
-                  0 LTC
-                </div>
-              </li>
-              <li (click)="setCoin('MOLK')">
-                <div class="coin_title">
-                  MobilinkToken
-                </div>
-                <div class="coin_amount">
-                  0 MOLK
+                  {{coin.balance}} {{coin.symbol}}
                 </div>
               </li>
             </ul>

@@ -22,6 +22,7 @@ export class WalletComponent implements OnInit {
   sendingAmountC =0.00;
   sendingAmountU = 0.00;
   walletBalance: any;
+  coin_data : any;
   _baseURL: string;
 
   @Input() sideMenuComponent: SideMenuComponent;
@@ -39,6 +40,7 @@ export class WalletComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.coin_data = this.coinInfo.getCheckedCoins();
     this.walletBalance = {
       'BTC' : 0,
       'ETH' : 0,

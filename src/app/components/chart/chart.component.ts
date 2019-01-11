@@ -91,7 +91,7 @@ export class ChartComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.coin_data = this.coinInfo.data;
+    this.coin_data = this.coinInfo.getCheckedCoins();
     this.getData();
     this.inteval = setInterval(()=>{
      this.getData();
