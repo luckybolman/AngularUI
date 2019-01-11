@@ -8,13 +8,13 @@
                 <div class="text-center w-100">
                     <div class="text-secondary h4">EXCHANGE</div>
                     <div class="btn-group w-100 round" dropdown>
-                        <button type="button" id="button-basic" class="btn dropdown-toggle bg-toggle-button" dropdownToggle [ngStyle]="{'border':coin_data[sendCoin].buttonColor + ' 2px solid'}">
+                        <button type="button" id="button-basic" class="btn dropdown-toggle bg-toggle-button" dropdownToggle [ngStyle]="{'border':coin_data[sendCoin].color + ' 2px solid'}">
                             <div class="d-flex">
                                 <div>
-                                    <img [src]="coin_data[sendCoin].selectedIcon" style="height : 40px;">                   
+                                    <img [src]="coin_data[sendCoin].icon" style="height : 40px;">                   
                                 </div>
-                                <div class="pl-3" style="font-size : 15px;" [ngStyle]="{'color':coin_data[sendCoin].buttonColor}">
-                                    {{coin_data[sendCoin].long}}<br>{{coin_data[sendCoin].balance}} {{coin_data[sendCoin].name}} (${{(coin_data[sendCoin].balance*marketInfo.coin_prices[coin_data[sendCoin].name]).toFixed(2)}} USD)
+                                <div class="pl-3" style="font-size : 15px;" [ngStyle]="{'color':coin_data[sendCoin].color}">
+                                    {{coin_data[sendCoin].name}}<br>{{coin_data[sendCoin].balance}} {{coin_data[sendCoin].symbol}} (${{(coin_data[sendCoin].balance*coin_data[sendCoin].price).toFixed(2)}} USD)
                                 </div>
                             </div>                            
                         </button>
@@ -23,10 +23,10 @@
                             <li role="menuitem"  *ngFor="let coin of coin_data; let i = index"><a [ngClass]="coin.hover1?'dropdown-item bg-toggle-hover':'dropdown-item bg-toggle'" (mouseover)="changeStyle1($event,i)" (mouseout)="changeStyle1($event,i)" (click)="setSendCoin(i)" >
                                 <div class="d-flex">
                                     <div>
-                                        <img [src]="coin.selectedIcon" style="height : 40px;">                   
+                                        <img [src]="coin.icon" style="height : 40px;">                   
                                     </div>
-                                    <div class="pl-3" style="font-size : 15px;" [ngStyle]="{'color':coin.buttonColor}">
-                                        {{coin.long}}<br>{{coin.balance}}{{coin.name}}(${{(coin.balance*marketInfo.coin_prices[coin.name]).toFixed(2)}}USD)
+                                    <div class="pl-3" style="font-size : 15px;" [ngStyle]="{'color':coin.color}">
+                                        {{coin.name}}<br>{{coin.balance}}{{coin.symbol}}(${{(coin.balance*coin.price).toFixed(2)}}USD)
                                     </div>
                                 </div> 
                             </a></li>                          
@@ -41,7 +41,7 @@
                     <div>
                         <form class="input-form">
                             <mat-form-field class="input-full-width">
-                                <input matInput class="btc-text border-bottom pt-3" name="sen_amount_c" [(ngModel)]="sendingAmountC" [ngStyle]="{'color':coin_data[sendCoin].buttonColor}" (keyup)="updateSendU()" >
+                                <input matInput class="btc-text border-bottom pt-3" name="sen_amount_c" [(ngModel)]="sendingAmountC" [ngStyle]="{'color':coin_data[sendCoin].color}" (keyup)="updateSendU()" >
                               
                             </mat-form-field>
 
@@ -60,13 +60,13 @@
                 <div class="text-center w-100">
                     <div class="text-secondary h4">RECEIVE</div>
                     <div class="btn-group w-100 round" dropdown>
-                        <button type="button" id="button-basic1" class="btn dropdown-toggle bg-toggle-button" dropdownToggle [ngStyle]="{'border':coin_data[receiveCoin].buttonColor + ' 2px solid'}">
+                        <button type="button" id="button-basic1" class="btn dropdown-toggle bg-toggle-button" dropdownToggle [ngStyle]="{'border':coin_data[receiveCoin].color + ' 2px solid'}">
                             <div class="d-flex">
                                 <div>
-                                    <img [src]="coin_data[receiveCoin].selectedIcon" style="height : 40px;">                   
+                                    <img [src]="coin_data[receiveCoin].icon" style="height : 40px;">                   
                                 </div>
-                                <div class="pl-3" style="font-size : 15px;" [ngStyle]="{'color':coin_data[receiveCoin].buttonColor}">
-                                    {{coin_data[receiveCoin].long}}<br>1 {{coin_data[sendCoin].name}} = {{getCoinsRate(coin_data[sendCoin].name, coin_data[receiveCoin].name)}} {{coin_data[receiveCoin].name}}
+                                <div class="pl-3" style="font-size : 15px;" [ngStyle]="{'color':coin_data[receiveCoin].color}">
+                                    {{coin_data[receiveCoin].name}}<br>1 {{coin_data[sendCoin].symbol}} = {{getCoinsRate(coin_data[sendCoin].price, coin_data[receiveCoin].price)}} {{coin_data[receiveCoin].symbol}}
                                 </div>
                             </div>                            
                         </button>
@@ -75,10 +75,10 @@
                             <li role="menuitem"  *ngFor="let coin of coin_data; let i = index"><a [ngClass]="coin.hover?'dropdown-item bg-toggle-hover':'dropdown-item bg-toggle'" (mouseover)="changeStyle($event,i)" (mouseout)="changeStyle($event,i)" (click)="setReceiveCoin(i)" >
                                 <div class="d-flex">
                                     <div>
-                                        <img [src]="coin.selectedIcon" style="height : 40px;">                   
+                                        <img [src]="coin.icon" style="height : 40px;">                   
                                     </div>
-                                    <div class="pl-3" style="font-size : 15px;" [ngStyle]="{'color':coin.buttonColor}">
-                                        {{coin.long}}<br>1 {{coin_data[sendCoin].name}} = {{getCoinsRate(coin_data[sendCoin].name, coin.name)}}{{coin.name}}
+                                    <div class="pl-3" style="font-size : 15px;" [ngStyle]="{'color':coin.color}">
+                                        {{coin.name}}<br>1 {{coin_data[sendCoin].symbol}} = {{getCoinsRate(coin_data[sendCoin].price, coin.price)}}{{coin.symbol}}
                                     </div>
                                 </div> 
                             </a></li>                          
@@ -87,7 +87,7 @@
                     <div class="mt-6">
                         <form class="input-form">
                             <mat-form-field class="input-full-width">
-                                <input matInput class="eth-text border-bottom pt-3" [(ngModel)]="receivingAmountC" name="rec_amount_c" [ngStyle]="{'color':coin_data[receiveCoin].buttonColor}" (keyup)="updateReceiveU()">                         
+                                <input matInput class="eth-text border-bottom pt-3" [(ngModel)]="receivingAmountC" name="rec_amount_c" [ngStyle]="{'color':coin_data[receiveCoin].color}" (keyup)="updateReceiveU()">                         
                             </mat-form-field>
                             <mat-form-field class="input-full-width">
                                 <input matInput class="usd-text"  name="rec_amount_u" [(ngModel)]="receivingAmountU" (keyup)="updateReceiveC()">                         
@@ -105,11 +105,11 @@
             <div class="d-flex justify-content-end text-lightgrey p-2">
                 <div class="text-right pr-2">
                     You are exchanging<br>
-                    <span class="btc-text" [ngStyle]="{'color':coin_data[sendCoin].buttonColor}">{{sendingAmountC}} {{coin_data[sendCoin].name}}</span><br>
+                    <span class="btc-text" [ngStyle]="{'color':coin_data[sendCoin].color}">{{sendingAmountC}} {{coin_data[sendCoin].symbol}}</span><br>
                     ${{sendingAmountU}}
                 </div> 
                 <div>
-                    <img [src]="coin_data[sendCoin].selectedIcon" style="height : 80px;">                   
+                    <img [src]="coin_data[sendCoin].icon" style="height : 80px;">                   
                 </div>
                 
             </div>
@@ -118,11 +118,11 @@
             </div>
             <div class="d-flex text-lightgrey p-2">
                 <div>
-                    <img [src]="coin_data[receiveCoin].selectedIcon" style="height : 80px;">
+                    <img [src]="coin_data[receiveCoin].icon" style="height : 80px;">
                 </div>                
                 <div class="text-left pl-2">
                     You will receive<br>
-                    <span class="eth-text" [ngStyle]="{'color':coin_data[receiveCoin].buttonColor}" >{{receivingAmountC}} {{coin_data[receiveCoin].name}}</span><br>
+                    <span class="eth-text" [ngStyle]="{'color':coin_data[receiveCoin].color}" >{{receivingAmountC}} {{coin_data[receiveCoin].symbol}}</span><br>
                     ${{receivingAmountU}}
                 </div>                
             </div>
@@ -131,7 +131,7 @@
             <button [ngClass]='(errorMessage!="" || sendingAmountC=="0.00" || sendingAmountU=="0.00")?"btn_exchange_disable":"btn_exchange"' [disabled]='errorMessage!="" || sendingAmountC=="0.00" || sendingAmountU=="0.00"' (click)='startExchange()'>EXCHANGE</button>
         </div>
         <div class="text-center text-secondary">
-            1 {{coin_data[sendCoin].name}} = {{getCoinsRate(coin_data[sendCoin].name, coin_data[receiveCoin].name)}} {{coin_data[receiveCoin].name}}
+            1 {{coin_data[sendCoin].symbol}} = {{getCoinsRate(coin_data[sendCoin].price, coin_data[receiveCoin].price)}} {{coin_data[receiveCoin].symbol}}
         </div>
 
     </div>
@@ -185,11 +185,11 @@
                 <div class="text-right pr-2">
                     <div *ngIf="step<3">Exchanging</div>
                     <div *ngIf="step==3">Exchanged</div>
-                    <span class="btc-text" [ngStyle]="{'color':coin_data[sendCoin].buttonColor}">{{sendingAmountC}}{{coin_data[sendCoin].name}}</span><br>
+                    <span class="btc-text" [ngStyle]="{'color':coin_data[sendCoin].color}">{{sendingAmountC}}{{coin_data[sendCoin].symbol}}</span><br>
                     ${{sendingAmountU}}
                 </div> 
                 <div>
-                    <img [src]="coin_data[sendCoin].selectedIcon" style="height : 80px;">                   
+                    <img [src]="coin_data[sendCoin].icon" style="height : 80px;">                   
                 </div>
                 
             </div>
@@ -198,12 +198,12 @@
             </div>
             <div class="d-flex text-lightgrey p-2">
                 <div>
-                    <img [src]="coin_data[receiveCoin].selectedIcon" style="height : 80px;">
+                    <img [src]="coin_data[receiveCoin].icon" style="height : 80px;">
                 </div>                
                 <div class="text-left pl-2">
                     <div *ngIf="step<3">Receiving</div>
                     <div *ngIf="step==3">Received</div>
-                    <span class="eth-text" [ngStyle]="{'color':coin_data[receiveCoin].buttonColor}" >{{receivingAmountC}}{{coin_data[receiveCoin].name}}</span><br>
+                    <span class="eth-text" [ngStyle]="{'color':coin_data[receiveCoin].color}" >{{receivingAmountC}}{{coin_data[receiveCoin].symbol}}</span><br>
                     ${{receivingAmountU}}
                 </div>                
             </div>           
