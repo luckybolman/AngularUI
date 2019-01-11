@@ -164,39 +164,52 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   };
 
-  getData(){
+  private getData(){
     for(let i=0;i<3;i++){
-      this.apiservice.getMarketInfo(this.portfolios[i].market)
+      this.apiservice.getMarketInfo(this.portfolios[i].symbol)
       .subscribe(data=>{
         let res:any = data;
         console.log(res);
 
-        this.portfolios[i].rate = parseFloat(res.data.priceUsd).toFixed(2); 
-        this.marketInfo.coin_prices[res.data.symbol] = this.portfolios[i].rate;
+        let raw = res['RAW'][this.portfolios[i].symbol]['USD'];
 
-        this.portfolios[i].change24 = parseFloat(res.data.changePercent24Hr).toFixed(2);
-        if(parseFloat(res.data.marketCapUsd)>=1e9)
-        this.portfolios[i].cap = (parseFloat(res.data.marketCapUsd)/1e9).toFixed(2)+'B';
-        else if(parseFloat(res.data.marketCapUsd)>=1e6)        
-        this.portfolios[i].cap = (parseFloat(res.data.marketCapUsd)/1e6).toFixed(2)+'M';
-        else if(parseFloat(res.data.marketCapUsd)>=1e3)
-        this.portfolios[i].cap = (parseFloat(res.data.marketCapUsd)/1e3).toFixed(2)+'K';
+        this.portfolios[i].rate = parseFloat(raw.PRICE).toFixed(2); 
+        this.marketInfo.coin_prices[this.portfolios[i].symbol] = this.portfolios[i].rate;
+
+        this.portfolios[i].change24 = parseFloat(raw.CHANGEPCT24HOUR).toFixed(2);
+
+        if(parseFloat(raw.MKTCAP)>=1e9)
+          this.portfolios[i].cap = (parseFloat(raw.MKTCAP)/1e9).toFixed(2)+'B';
+        else if(parseFloat(raw.MKTCAP)>=1e6)        
+          this.portfolios[i].cap = (parseFloat(raw.MKTCAP)/1e6).toFixed(2)+'M';
+        else if(parseFloat(raw.MKTCAP)>=1e3)
+          this.portfolios[i].cap = (parseFloat(raw.MKTCAP)/1e3).toFixed(2)+'K';
         else
-        this.portfolios[i].cap = parseFloat(res.data.marketCapUsd).toFixed(2);
+          this.portfolios[i].cap = parseFloat(raw.MKTCAP).toFixed(2);
         
-        if(parseFloat(res.data.volumeUsd24Hr)>=1e9)
-        this.portfolios[i].volumn24 = (parseFloat(res.data.volumeUsd24Hr)/1e9).toFixed(2)+'B';
-        else if(parseFloat(res.data.marketCapUsd)>=1e6)        
-        this.portfolios[i].volumn24 = (parseFloat(res.data.volumeUsd24Hr)/1e6).toFixed(2)+'M';
-        else if(parseFloat(res.data.marketCapUsd)>=1e3)
-        this.portfolios[i].volumn24 = (parseFloat(res.data.volumeUsd24Hr)/1e3).toFixed(2)+'K';
+        if(parseFloat(raw.TOTALVOLUME24HTO)>=1e9)
+          this.portfolios[i].volumn24 = (parseFloat(raw.TOTALVOLUME24HTO)/1e9).toFixed(2)+'B';
+        else if(parseFloat(raw.TOTALVOLUME24HTO)>=1e6)        
+          this.portfolios[i].volumn24 = (parseFloat(raw.TOTALVOLUME24HTO)/1e6).toFixed(2)+'M';
+        else if(parseFloat(raw.TOTALVOLUME24HTO)>=1e3)
+          this.portfolios[i].volumn24 = (parseFloat(raw.TOTALVOLUME24HTO)/1e3).toFixed(2)+'K';
         else
-        this.portfolios[i].volumn24 = parseFloat(res.data.volumeUsd24Hr).toFixed(2);
-        
+          this.portfolios[i].volumn24 = parseFloat(raw.TOTALVOLUME24HTO).toFixed(2);
       })
     }
   }
   
+  private getMarketRate() {
+    if(!this.marketInfo.market_rate) {
+      this.http.get(this._baseURL + '/market/rate')
+      .subscribe(
+        data => {
+          let res: any = data;
+          this.marketInfo.market_rate = res.rate;
+      });
+    }
+  }
+
   openModal(content){
     this.modalService.open(content, { centered: true });
   }
@@ -208,17 +221,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       return 'by clicking on a backdrop';
     } else {
       return  `with: ${reason}`;
-    }
-  }
-
-  private getMarketRate() {
-    if(!this.marketInfo.market_rate) {
-      this.http.get(this._baseURL + '/market/rate')
-      .subscribe(
-        data => {
-          let res: any = data;
-          this.marketInfo.market_rate = res.rate;
-      });
     }
   }
 }
