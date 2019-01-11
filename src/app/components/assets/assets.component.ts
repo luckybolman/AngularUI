@@ -26,13 +26,15 @@ export class AssetsComponent implements OnInit {
   }
 
   searchCoin() {
-    console.log(this.coinTitle);
-    this.showCoinData = [];
-    if(this.coinTitle=="") this.showCoinData = this.coinInfo;
+    if(this.coinTitle=="") 
+      this.showCoinData = this.coinInfo.data;
     else {
-      /*for(let coinItem of this.coinData){
-        if(coinItem.coin_name.search(this.coinTitle)!=-1) this.showCoinData.push(coinItem);
-      }*/
+      this.showCoinData = [];
+      var sub = this.coinTitle.toLowerCase();
+      for(let coinItem of this.coinInfo.data){
+        if(coinItem.name.toLowerCase().search(sub) != -1 || coinItem.symbol.toLowerCase().search(sub) != -1) 
+          this.showCoinData.push(coinItem);
+      }
     }
   }
 }
