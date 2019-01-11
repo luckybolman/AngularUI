@@ -23,7 +23,8 @@ export class ApiService {
     return this.http.get('https://api.coincap.io/v2/assets/' + market + '/history?interval=' + intervalString+ '&start=' + previous + '&end=' + now);
   }
 
-  getMarketInfo(market){
-    return this.http.get('https://api.coincap.io/v2/assets/'+ market);
+  getMarketInfo(coin){
+    return this.http.get('https://min-api.cryptocompare.com/data/pricemultifull?fsyms=' + coin + '&tsyms=USD');
+    //return this.http.get('https://api.coincap.io/v2/assets/'+ market);
   }
 }
