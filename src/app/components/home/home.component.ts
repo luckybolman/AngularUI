@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { ElectronService} from '../../providers/electron.service';
 import * as Highcharts from 'highcharts';
         
-import { MarketInfo, AppConstants } from '../globaldata';
+import { MarketInfo, AppConstants, CoinInfo } from '../globaldata';
 import { NgbActiveModal, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from '../../api.service';
 
@@ -86,67 +86,15 @@ export class HomeComponent implements OnInit, OnDestroy {
     private chRef: ChangeDetectorRef, 
     private modalService: NgbModal,
     private apiservice : ApiService,
-    public marketInfo: MarketInfo
+    public marketInfo: MarketInfo,
+    public coinInfo: CoinInfo
   ) { 
     this._baseURL = AppConstants.baseURL;
   }
 
   ngOnInit() {
     
-    this.portfolios = [
-      {
-        img_url : "./assets/BTC_Logo.png",
-        name : 'Bitcoin',
-        market : 'bitcoin',
-        symbol : 'BTC',
-        rate : 6489,
-        cap : 113,
-        volumn24 : '',
-        change24 : 0.48,
-        balance : 0,
-        value : 0,
-        portfolio : 0
-      },
-      {
-        img_url : "./assets/ETH_Logo.png",
-        name : 'Ethereum',
-        market : 'ethereum',
-        symbol : 'ETH',
-        rate : 205.8,
-        cap : 21.2,
-        volumn24 : '',
-        change24 : -1.33,
-        balance : 0,
-        value : 0,
-        portfolio : 0
-      },
-      {
-        img_url : "./assets/LTC_Logo.png",
-        name : 'Litecoin',
-        market : 'litecoin',
-        symbol : 'LTC',
-        rate : 53.8,
-        cap : 3.13,
-        volumn24 : '',
-        change24 : 1.05,
-        balance : 0,
-        value : 0,
-        portfolio : 0
-      },
-      {
-        img_url : "./assets/MOLK_Logo.png",
-        name : 'Mobilink',
-        market : 'mobilinktoken',
-        symbol : 'MOLK',
-        rate : 0.12,
-        cap : '132M',
-        volumn24 : '4.21K',
-        change24 : -0.99,
-        balance : 0,
-        value : 0,
-        portfolio : 0
-      }
-    ];                
+    this.portfolios = this.coinInfo.data;
     
     this.getData();
     this.getMarketRate();
@@ -171,8 +119,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         let res:any = data;
         let raw = res['RAW'][this.portfolios[i].symbol]['USD'];
 
-        this.portfolios[i].rate = raw.PRICE > 1 ? parseFloat(raw.PRICE).toFixed(2) : parseFloat(raw.PRICE).toFixed(4); 
-        this.marketInfo.coin_prices[this.portfolios[i].symbol] = this.portfolios[i].rate;
+        this.portfolios[i].price = raw.PRICE > 1 ? parseFloat(raw.PRICE).toFixed(2) : parseFloat(raw.PRICE).toFixed(4); 
         this.portfolios[i].change24 = parseFloat(raw.CHANGEPCT24HOUR).toFixed(2);
 
         if(parseFloat(raw.MKTCAP)>=1e9)
