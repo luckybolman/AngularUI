@@ -150,32 +150,29 @@ export class HomeComponent implements OnInit, OnDestroy {
     
     this.getData();
     this.getMarketRate();
-    this.inteval = setInterval(()=>{
-      this.getData();
-      this.getMarketRate();
-    },10000);       
+
+    if(!this.marketInfo.market_refresh_interval) {
+      this.marketInfo.market_refresh_interval = setInterval(()=>{
+        this.getData();
+        this.getMarketRate();
+      }, 10000);       
+    }
+    
     this.chRef.detectChanges();
   }
 
   ngOnDestroy() {
-    // console.log("Leave page");
-    if(this.inteval){
-      clearInterval(this.inteval);
-    }
   };
 
   private getData(){
-    for(let i=0;i<3;i++){
+    for(let i=0; i<this.portfolios.length; i++){
       this.apiservice.getMarketInfo(this.portfolios[i].symbol)
       .subscribe(data=>{
         let res:any = data;
-        console.log(res);
-
         let raw = res['RAW'][this.portfolios[i].symbol]['USD'];
 
-        this.portfolios[i].rate = parseFloat(raw.PRICE).toFixed(2); 
+        this.portfolios[i].rate = raw.PRICE > 1 ? parseFloat(raw.PRICE).toFixed(2) : parseFloat(raw.PRICE).toFixed(4); 
         this.marketInfo.coin_prices[this.portfolios[i].symbol] = this.portfolios[i].rate;
-
         this.portfolios[i].change24 = parseFloat(raw.CHANGEPCT24HOUR).toFixed(2);
 
         if(parseFloat(raw.MKTCAP)>=1e9)

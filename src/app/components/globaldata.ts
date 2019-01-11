@@ -16,6 +16,9 @@ export class MarketInfo {
   };
 
   market_rate: number = 0;
+
+  market_refresh_interval: any;
+
 }
 
 export class AppConstants {
