@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ApiService } from '../../api.service';
-import { MarketInfo } from '../globaldata';
+import { CoinInfo } from '../globaldata';
 
 import * as Highcharts from 'highcharts';
 @Component({
@@ -10,44 +10,7 @@ import * as Highcharts from 'highcharts';
 })
 export class ChartComponent implements OnInit, OnDestroy {
 
-  coin_data = [
-    { 
-      buttonColor : '#ea9914',
-      selectedIcon : "./assets/BTC_Logo.png",
-      name : 'Bitcoin',
-      symbol : 'BTC',
-      market : 'bitcoin',
-      rate : '0',
-      hover: false,
-    },
-    {
-      buttonColor : '#7d8fe8',
-      selectedIcon : "./assets/ETH_Logo.png",
-      name : 'Ethereum',
-      symbol : 'ETH',
-      market : 'ethereum',
-      rate : '0',
-      hover : false,
-    },
-    {
-      buttonColor : '#989898',
-      selectedIcon : "./assets/LTC_Logo.png",
-      name : 'Litecoin',
-      symbol : 'LTC',
-      market : 'litecoin',
-      rate : '0',
-      hover : false,
-    },
-    {
-      buttonColor : '#ea7070',
-      selectedIcon : "./assets/MOLK_Logo.png",
-      name : 'MobilinkToken',
-      symbol : 'MOLK',
-      market : 'mobilinkToken',
-      rate : '0.0138',
-      hover : false,
-    },
-  ];
+  coin_data : any;
 
   BTChistory : any;
   ETHhistory : any;
@@ -124,11 +87,11 @@ export class ChartComponent implements OnInit, OnDestroy {
   currentInterval = 0;
   constructor(
     private apiservice : ApiService,
-    public marketInfo: MarketInfo
+    public coinInfo: CoinInfo
   ) { }
 
   ngOnInit() {
-    // console.log('ngOnInit Page');
+    this.coin_data = this.coinInfo.data;
     this.getData();
     this.inteval = setInterval(()=>{
      this.getData();

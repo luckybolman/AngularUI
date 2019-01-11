@@ -5,13 +5,13 @@
   <div class="w-100 align-self-stretch text-white">
     <div class="h-25 justify-content-center p-5">
         <div class="btn-group w-100 round" dropdown>
-            <button type="button" id="button-basic" class="btn dropdown-toggle bg-toggle-button" dropdownToggle [ngStyle]="{'border':coin_data[selCoin].buttonColor + ' 2px solid'}">
+            <button type="button" id="button-basic" class="btn dropdown-toggle bg-toggle-button" dropdownToggle [ngStyle]="{'border':coin_data[selCoin].color + ' 2px solid'}">
                 <div class="d-flex">
                     <div>
-                        <img [src]="coin_data[selCoin].selectedIcon" style="height : 40px;">                   
+                        <img [src]="coin_data[selCoin].icon" style="height : 40px;">                   
                     </div>
-                    <div class="pl-3" style="font-size : 15px;" [ngStyle]="{'color':coin_data[selCoin].buttonColor}">
-                        {{coin_data[selCoin].name}} <br>1 {{coin_data[selCoin].symbol}} = {{marketInfo.coin_prices[coin_data[selCoin].symbol]}} USD
+                    <div class="pl-3" style="font-size : 15px;" [ngStyle]="{'color':coin_data[selCoin].color}">
+                        {{coin_data[selCoin].name}} <br>1 {{coin_data[selCoin].symbol}} = {{coin_data[selCoin].price}} USD
                     </div>
                 </div>                            
             </button>
@@ -20,10 +20,10 @@
                 <li role="menuitem"  *ngFor="let coin of coin_data; let i = index"><a [ngClass]="coin.hover?'dropdown-item bg-toggle-hover':'dropdown-item bg-toggle'" (mouseover)="changeStyle($event,i)" (mouseout)="changeStyle($event,i)" (click)="setSelCoin(i)" >
                     <div class="d-flex">
                         <div>
-                            <img [src]="coin.selectedIcon" style="height : 40px;">                   
+                            <img [src]="coin.icon" style="height : 40px;">                   
                         </div>
-                        <div class="pl-3" style="font-size : 15px;" [ngStyle]="{'color':coin.buttonColor}">
-                            {{coin.name}}<br> 1 {{coin.symbol}} = {{marketInfo.coin_prices[coin.symbol]}} USD
+                        <div class="pl-3" style="font-size : 15px;" [ngStyle]="{'color':coin.color}">
+                            {{coin.name}}<br> 1 {{coin.symbol}} = {{coin.price}} USD
                         </div>
                     </div> 
                 </a></li>                          
