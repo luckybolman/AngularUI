@@ -22,7 +22,7 @@ export class ChartComponent implements OnInit, OnDestroy {
     },
     {
       buttonColor : '#7d8fe8',
-      selectedIcon : "./assets/ethereum.png",
+      selectedIcon : "./assets/ETH_Logo.png",
       name : 'Ethereum',
       symbol : 'ETH',
       market : 'ethereum',

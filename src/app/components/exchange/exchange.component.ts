@@ -37,7 +37,7 @@ export class ExchangeComponent implements OnInit {
     },
     {
       buttonColor : '#7d8fe8',
-      selectedIcon : "./assets/ethereum.png",
+      selectedIcon : "./assets/ETH_Logo.png",
       name : 'ETH',
       long : 'Ethereum',
       balance : 0.00,

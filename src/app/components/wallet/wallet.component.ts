@@ -55,7 +55,7 @@ export class WalletComponent implements OnInit {
     }
     else if(coin=='ETH') {
       this.buttonColor = "#627eea";
-      this.selectedIcon = "./assets/ethereum.png";
+      this.selectedIcon = "./assets/ETH_Logo.png";
     }
     else if(coin=='LTC') {
       this.buttonColor = "#989898";

@@ -108,7 +108,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         portfolio : 0
       },
       {
-        img_url : "./assets/ethereum.png",
+        img_url : "./assets/ETH_Logo.png",
         name : 'Ethereum',
         market : 'ethereum',
         symbol : 'ETH',
