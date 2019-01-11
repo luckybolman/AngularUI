@@ -104,7 +104,7 @@
                             <div *ngIf="p.change24>=0" class="text-success">
                                 +{{p.change24}}%
                             </div>
-                            <div *ngIf="p.change24<0" class="text-muted">
+                            <div *ngIf="p.change24<0" class="text-danger">
                                 {{p.change24}}%
                             </div>
                                                         
@@ -154,7 +154,6 @@
     </div>
 </ng-template>
 <ng-template #emailcontent let-modal>
-    
     <div class="modal-body text-center">
         <h4>Restore from email</h4>
         <p>Please paste in your recovery link sent to your email</p>
