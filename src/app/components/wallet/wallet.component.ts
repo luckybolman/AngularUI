@@ -3,7 +3,7 @@ import { NgbActiveModal, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-
 import { MatSnackBar } from '@angular/material';
 import { SideMenuComponent } from '../side-menu/side-menu.component';
 import { NgModule } from '@angular/core';
-import { UserInfo, AppConstants } from '../globaldata';
+import { UserInfo, AppConstants, CoinInfo } from '../globaldata';
 import { MessageService } from 'primeng/api';
 import { HttpClient } from '@angular/common/http';
 
@@ -29,6 +29,7 @@ export class WalletComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private userInfo: UserInfo,
+    private coinInfo: CoinInfo,
     private snackBar: MatSnackBar,
     private messageService: MessageService,
     private http : HttpClient
@@ -49,22 +50,9 @@ export class WalletComponent implements OnInit {
 
   setCoin(coin:string){
     this.selectedCoin = coin;
-    if(coin=='BTC') {
-      this.buttonColor = '#ea9914';
-      this.selectedIcon = "./assets/BTC_Logo.png";
-    }
-    else if(coin=='ETH') {
-      this.buttonColor = "#627eea";
-      this.selectedIcon = "./assets/ETH_Logo.png";
-    }
-    else if(coin=='LTC') {
-      this.buttonColor = "#989898";
-      this.selectedIcon = "./assets/LTC_Logo.png";
-    }
-    else if(coin=='MOLK') {
-      this.buttonColor = "#153281";
-      this.selectedIcon = "./assets/MOLK_Logo.png";
-    }
+    var data = this.coinInfo.getDataFromSymbol(coin);
+    this.buttonColor = data.color;
+    this.selectedIcon = data.icon;
   }
 
   openModal(content){
