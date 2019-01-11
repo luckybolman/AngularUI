@@ -14,7 +14,7 @@
                                     <img [src]="coin_data[sendCoin].selectedIcon" style="height : 40px;">                   
                                 </div>
                                 <div class="pl-3" style="font-size : 15px;" [ngStyle]="{'color':coin_data[sendCoin].buttonColor}">
-                                    {{coin_data[sendCoin].long}}<br>{{coin_data[sendCoin].balance}} {{coin_data[sendCoin].name}} (${{(coin_data[sendCoin].balance*coin_data[sendCoin].rate).toFixed(2)}} USD)
+                                    {{coin_data[sendCoin].long}}<br>{{coin_data[sendCoin].balance}} {{coin_data[sendCoin].name}} (${{(coin_data[sendCoin].balance*marketInfo.coin_prices[coin_data[sendCoin].name]).toFixed(2)}} USD)
                                 </div>
                             </div>                            
                         </button>
@@ -26,7 +26,7 @@
                                         <img [src]="coin.selectedIcon" style="height : 40px;">                   
                                     </div>
                                     <div class="pl-3" style="font-size : 15px;" [ngStyle]="{'color':coin.buttonColor}">
-                                        {{coin.long}}<br>{{coin.balance}}{{coin.name}}(${{(coin.balance*coin.rate).toFixed(2)}}USD)
+                                        {{coin.long}}<br>{{coin.balance}}{{coin.name}}(${{(coin.balance*marketInfo.coin_prices[coin.name]).toFixed(2)}}USD)
                                     </div>
                                 </div> 
                             </a></li>                          
@@ -66,7 +66,7 @@
                                     <img [src]="coin_data[receiveCoin].selectedIcon" style="height : 40px;">                   
                                 </div>
                                 <div class="pl-3" style="font-size : 15px;" [ngStyle]="{'color':coin_data[receiveCoin].buttonColor}">
-                                    {{coin_data[receiveCoin].long}}<br>1 {{coin_data[sendCoin].name}} = {{coin_rates[coin_data[sendCoin].name + coin_data[receiveCoin].name]}} {{coin_data[receiveCoin].name}}
+                                    {{coin_data[receiveCoin].long}}<br>1 {{coin_data[sendCoin].name}} = {{getCoinsRate(coin_data[sendCoin].name, coin_data[receiveCoin].name)}} {{coin_data[receiveCoin].name}}
                                 </div>
                             </div>                            
                         </button>
@@ -78,7 +78,7 @@
                                         <img [src]="coin.selectedIcon" style="height : 40px;">                   
                                     </div>
                                     <div class="pl-3" style="font-size : 15px;" [ngStyle]="{'color':coin.buttonColor}">
-                                        {{coin.long}}<br>1 {{coin_data[sendCoin].name}} = {{coin_rates[coin_data[sendCoin].name + coin.name]}}{{coin.name}}
+                                        {{coin.long}}<br>1 {{coin_data[sendCoin].name}} = {{getCoinsRate(coin_data[sendCoin].name, coin.name)}}{{coin.name}}
                                     </div>
                                 </div> 
                             </a></li>                          
@@ -131,7 +131,7 @@
             <button [ngClass]='(errorMessage!="" || sendingAmountC=="0.00" || sendingAmountU=="0.00")?"btn_exchange_disable":"btn_exchange"' [disabled]='errorMessage!="" || sendingAmountC=="0.00" || sendingAmountU=="0.00"' (click)='startExchange()'>EXCHANGE</button>
         </div>
         <div class="text-center text-secondary">
-            1 {{coin_data[sendCoin].name}} = {{coin_rates[coin_data[sendCoin].name + coin_data[receiveCoin].name]}} {{coin_data[receiveCoin].name}}
+            1 {{coin_data[sendCoin].name}} = {{getCoinsRate(coin_data[sendCoin].name, coin_data[receiveCoin].name)}} {{coin_data[receiveCoin].name}}
         </div>
 
     </div>
