@@ -1,7 +1,10 @@
 import { Component, OnInit, ChangeDetectorRef, Input, OnDestroy } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
 import { ElectronService} from '../../providers/electron.service';
 import * as Highcharts from 'highcharts';
         
+import { MarketInfo, AppConstants } from '../globaldata';
 import { NgbActiveModal, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from '../../api.service';
 
@@ -11,6 +14,7 @@ import { ApiService } from '../../api.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, OnDestroy {
+  _baseURL : string;
   isBackup : boolean = false;
   portfolios :  any[];
   total_price = 56.4;
@@ -76,8 +80,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   }; // required
 
   inteval : any;
-  constructor(private electron : ElectronService, private chRef: ChangeDetectorRef, private modalService: NgbModal,
-    private apiservice : ApiService) { }
+  constructor(
+    private electron : ElectronService, 
+    private http : HttpClient,
+    private chRef: ChangeDetectorRef, 
+    private modalService: NgbModal,
+    private apiservice : ApiService,
+    public marketInfo: MarketInfo
+  ) { 
+    this._baseURL = AppConstants.baseURL;
+  }
 
   ngOnInit() {
     
@@ -137,10 +149,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     ];                
     
     this.getData();
+    this.getMarketRate();
     this.inteval = setInterval(()=>{
-     this.getData();
+      this.getData();
+      this.getMarketRate();
     },10000);       
-
     this.chRef.detectChanges();
   }
 
@@ -157,7 +170,10 @@ export class HomeComponent implements OnInit, OnDestroy {
       .subscribe(data=>{
         let res:any = data;
         console.log(res);
+
         this.portfolios[i].rate = parseFloat(res.data.priceUsd).toFixed(2); 
+        this.marketInfo.coin_prices[res.data.symbol] = this.portfolios[i].rate;
+
         this.portfolios[i].change24 = parseFloat(res.data.changePercent24Hr).toFixed(2);
         if(parseFloat(res.data.marketCapUsd)>=1e9)
         this.portfolios[i].cap = (parseFloat(res.data.marketCapUsd)/1e9).toFixed(2)+'B';
@@ -192,6 +208,17 @@ export class HomeComponent implements OnInit, OnDestroy {
       return 'by clicking on a backdrop';
     } else {
       return  `with: ${reason}`;
+    }
+  }
+
+  private getMarketRate() {
+    if(!this.marketInfo.market_rate) {
+      this.http.get(this._baseURL + '/market/rate')
+      .subscribe(
+        data => {
+          let res: any = data;
+          this.marketInfo.market_rate = res.rate;
+      });
     }
   }
 }
