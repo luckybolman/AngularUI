@@ -30,7 +30,7 @@ import { SideMenuComponent } from './components/side-menu/side-menu.component';
 import { ExchangeComponent } from './components/exchange/exchange.component';
 import { WalletComponent } from './components/wallet/wallet.component';
 import { BackupComponent } from './components/backup/backup.component';
-import { UserInfo, MarketInfo } from './components/globaldata';
+import { UserInfo, MarketInfo, CoinInfo } from './components/globaldata';
 
 import { DataTablesModule } from 'angular-datatables';
 import  { HighchartsChartModule} from 'highcharts-angular';
@@ -96,7 +96,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   exports : [
     SideMenuComponent
   ],
-  providers: [ElectronService, UserInfo, MarketInfo],
+  providers: [ElectronService, UserInfo, MarketInfo, CoinInfo],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
