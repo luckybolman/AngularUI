@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ApiService } from '../../api.service';
+import { MarketInfo } from '../globaldata';
+
 import * as Highcharts from 'highcharts';
 @Component({
   selector: 'app-chart',
@@ -12,32 +14,36 @@ export class ChartComponent implements OnInit, OnDestroy {
     { 
       buttonColor : '#ea9914',
       selectedIcon : "./assets/BTC_Logo.png",
-      name : 'BTC',
-      long : 'bitcoin',
+      name : 'Bitcoin',
+      symbol : 'BTC',
+      market : 'bitcoin',
       rate : '0',
       hover: false,
     },
     {
       buttonColor : '#7d8fe8',
       selectedIcon : "./assets/ethereum.png",
-      name : 'ETH',
-      long : 'ethereum',
+      name : 'Ethereum',
+      symbol : 'ETH',
+      market : 'ethereum',
       rate : '0',
       hover : false,
     },
     {
       buttonColor : '#989898',
       selectedIcon : "./assets/LTC_Logo.png",
-      name : 'LTC',
-      long : 'litecoin',
+      name : 'Litecoin',
+      symbol : 'LTC',
+      market : 'litecoin',
       rate : '0',
       hover : false,
     },
     {
       buttonColor : '#ea7070',
       selectedIcon : "./assets/MOLK_Logo.png",
-      name : 'MOLK',
-      long : 'mobilinkToken',
+      name : 'MobilinkToken',
+      symbol : 'MOLK',
+      market : 'mobilinkToken',
       rate : '0.0138',
       hover : false,
     },
@@ -116,7 +122,10 @@ export class ChartComponent implements OnInit, OnDestroy {
     
   intervalString = ['1m','15m','1h','1d'];
   currentInterval = 0;
-  constructor(private apiservice : ApiService) { }
+  constructor(
+    private apiservice : ApiService,
+    public marketInfo: MarketInfo
+  ) { }
 
   ngOnInit() {
     // console.log('ngOnInit Page');
@@ -133,7 +142,7 @@ export class ChartComponent implements OnInit, OnDestroy {
   }
 
   getData(){
-    this.apiservice.getCryptoPriceHistory(this.coin_data[this.selCoin].long, this.currentInterval)
+    this.apiservice.getCryptoPriceHistory(this.coin_data[this.selCoin].market, this.currentInterval)
     .subscribe(data=>{
       if(this.selCoin==0){
         this.BTChistory = data;
@@ -142,16 +151,8 @@ export class ChartComponent implements OnInit, OnDestroy {
       } else if(this.selCoin == 2){
         this.LTChistory = data;
       }    
-      this.setChartCoin(this.coin_data[this.selCoin].name);
+      this.setChartCoin(this.coin_data[this.selCoin].symbol);
     });
-    for(let i=0;i<3;i++){
-      this.apiservice.getMarketInfo(this.coin_data[i].long)
-      .subscribe(data=>{
-        let res:any = data;
-        console.log(res);
-        this.coin_data[i].rate = parseFloat(res.data.priceUsd).toFixed(2); 
-      })
-    }
   }
   changeStyle($event,i){
     if(i!=this.selCoin)

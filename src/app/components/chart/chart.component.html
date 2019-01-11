@@ -11,7 +11,7 @@
                         <img [src]="coin_data[selCoin].selectedIcon" style="height : 40px;">                   
                     </div>
                     <div class="pl-3" style="font-size : 15px;" [ngStyle]="{'color':coin_data[selCoin].buttonColor}">
-                        {{coin_data[selCoin].long}} <br>1 {{coin_data[selCoin].name}} = {{coin_data[selCoin].rate}} USD
+                        {{coin_data[selCoin].name}} <br>1 {{coin_data[selCoin].symbol}} = {{marketInfo.coin_prices[coin_data[selCoin].symbol]}} USD
                     </div>
                 </div>                            
             </button>
@@ -23,7 +23,7 @@
                             <img [src]="coin.selectedIcon" style="height : 40px;">                   
                         </div>
                         <div class="pl-3" style="font-size : 15px;" [ngStyle]="{'color':coin.buttonColor}">
-                            {{coin.long}}<br> 1 {{coin.name}} = {{coin.rate}} USD
+                            {{coin.name}}<br> 1 {{coin.symbol}} = {{marketInfo.coin_prices[coin.symbol]}} USD
                         </div>
                     </div> 
                 </a></li>                          
