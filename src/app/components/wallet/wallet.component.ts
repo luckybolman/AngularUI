@@ -3,7 +3,7 @@ import { NgbActiveModal, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-
 import { MatSnackBar } from '@angular/material';
 import { SideMenuComponent } from '../side-menu/side-menu.component';
 import { NgModule } from '@angular/core';
-import { UserInfo } from '../userinfo';
+import { UserInfo, AppConstants } from '../globaldata';
 import { MessageService } from 'primeng/api';
 import { HttpClient } from '@angular/common/http';
 
@@ -22,6 +22,7 @@ export class WalletComponent implements OnInit {
   sendingAmountC =0.00;
   sendingAmountU = 0.00;
   walletBalance: any;
+  _baseURL: string;
 
   @Input() sideMenuComponent: SideMenuComponent;
 
@@ -33,6 +34,7 @@ export class WalletComponent implements OnInit {
     private http : HttpClient
   ) {
    this.setCoin('BTC');
+    this._baseURL = AppConstants.baseURL;
   }
 
   ngOnInit() {
@@ -67,7 +69,7 @@ export class WalletComponent implements OnInit {
 
   openModal(content){
     if(this.userInfo.bLogined) {
-      this.http.get('http://localhost:8000/wallet/address?username=' + this.userInfo.username + '&coin=' + this.selectedCoin)
+      this.http.get(this._baseURL + '/wallet/address?username=' + this.userInfo.username + '&coin=' + this.selectedCoin)
       .subscribe(
         data => {
           let res:any = data;
@@ -118,7 +120,7 @@ export class WalletComponent implements OnInit {
 
   getBalance() {
     if(this.userInfo.bLogined) {
-      this.http.get('http://localhost:8000/wallet/balances?username=' + this.userInfo.username)
+      this.http.get(this._baseURL + '/wallet/balances?username=' + this.userInfo.username)
       .subscribe(
         data => {
           let res:any = data;
