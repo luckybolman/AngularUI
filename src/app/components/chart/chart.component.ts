@@ -11,10 +11,7 @@ import * as Highcharts from 'highcharts';
 export class ChartComponent implements OnInit, OnDestroy {
 
   coin_data : any;
-
-  BTChistory : any;
-  ETHhistory : any;
-  LTChistory : any;
+  chartHistory : any;
 
   selCoin = 0;
   inteval : any;
@@ -79,7 +76,7 @@ export class ChartComponent implements OnInit, OnDestroy {
       }
     },
     series: [{
-        name: 'Bitcoin',
+        name: 'Coin',
         data: [] 
     }]}; // required
     
@@ -107,13 +104,7 @@ export class ChartComponent implements OnInit, OnDestroy {
   getData(){
     this.apiservice.getCryptoPriceHistory(this.coin_data[this.selCoin].market, this.currentInterval)
     .subscribe(data=>{
-      if(this.selCoin==0){
-        this.BTChistory = data;
-      } else if(this.selCoin == 1){
-        this.ETHhistory = data;
-      } else if(this.selCoin == 2){
-        this.LTChistory = data;
-      }    
+      this.chartHistory = data;
       this.setChartCoin(this.coin_data[this.selCoin].symbol);
     });
   }
@@ -128,29 +119,12 @@ export class ChartComponent implements OnInit, OnDestroy {
   }
 
   setChartCoin(market) {
-    if(market == 'BTC'){ 
-      this.chartOptions.series[0].data = [];
-      this.chartOptions.series[0].name = 'Bitcoin';
-      for(let i = 0 ;i < this.BTChistory.data.length; i++){
-        // this.chartOptions.xAxis.categories.push(this.BTChistory.data[i].time);
-        this.chartOptions.series[0].data.push({x: this.BTChistory.data[i].time, y: parseFloat(this.BTChistory.data[i].priceUsd)});
-      }
-      this.updateFlag = true;
-    } else if( market == 'ETH'){
-      this.chartOptions.series[0].data = [];
-      this.chartOptions.series[0].name = "Ethereum";
-      for(let i = 0 ;i < this.ETHhistory.data.length; i++){
-        this.chartOptions.series[0].data.push({x: this.ETHhistory.data[i].time, y: parseFloat(this.ETHhistory.data[i].priceUsd)});  
-      }
-      this.updateFlag = true;
-    } else if (market == 'LTC') {
-      this.chartOptions.series[0].data = [];
-      this.chartOptions.series[0].name = "Litecoin";
-      for(let i = 0 ;i < this.LTChistory.data.length; i++){
-        this.chartOptions.series[0].data.push({x: this.LTChistory.data[i].time, y: parseFloat(this.LTChistory.data[i].priceUsd)});
-      }
-      this.updateFlag = true;
+    this.chartOptions.series[0].data = [];
+    this.chartOptions.series[0].name = this.coin_data[this.selCoin].name;
+    for(let i = 0 ;i < this.chartHistory.data.length; i++){
+      this.chartOptions.series[0].data.push({x: this.chartHistory.data[i].time, y: parseFloat(this.chartHistory.data[i].priceUsd)});
     }
+    this.updateFlag = true;
   }
 
   changeInterval(num){
