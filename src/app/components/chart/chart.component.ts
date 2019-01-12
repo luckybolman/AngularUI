@@ -102,11 +102,19 @@ export class ChartComponent implements OnInit, OnDestroy {
   }
 
   getData(){
-    this.apiservice.getCryptoPriceHistory(this.coin_data[this.selCoin].market, this.currentInterval)
-    .subscribe(data=>{
-      this.chartHistory = data;
-      this.setChartCoin(this.coin_data[this.selCoin].symbol);
-    });
+    if(this.coin_data[this.selCoin].site == 'coincap') {
+      this.apiservice.getCryptoPriceHistory(this.coin_data[this.selCoin].market, this.currentInterval)
+      .subscribe(data=>{
+        this.chartHistory = data;
+        this.setChartCoin(this.coin_data[this.selCoin].site);
+      });
+    } else {
+      this.apiservice.getCryptoComparePriceHistory(this.coin_data[this.selCoin].symbol, this.currentInterval)
+      .subscribe(data=>{
+        this.chartHistory = data;
+        this.setChartCoin(this.coin_data[this.selCoin].site);
+      });
+    }
   }
   changeStyle($event,i){
     if(i!=this.selCoin)
@@ -118,11 +126,17 @@ export class ChartComponent implements OnInit, OnDestroy {
     this.getData();
   }
 
-  setChartCoin(market) {
+  setChartCoin(site) {
     this.chartOptions.series[0].data = [];
     this.chartOptions.series[0].name = this.coin_data[this.selCoin].name;
-    for(let i = 0 ;i < this.chartHistory.data.length; i++){
-      this.chartOptions.series[0].data.push({x: this.chartHistory.data[i].time, y: parseFloat(this.chartHistory.data[i].priceUsd)});
+    if(site == "coincap") {
+      for(let i = 0 ;i < this.chartHistory.data.length; i++){
+        this.chartOptions.series[0].data.push({x: this.chartHistory.data[i].time, y: parseFloat(this.chartHistory.data[i].priceUsd)});
+      }
+    } else {
+      for(let i = 0 ;i < this.chartHistory.Data.length; i++){
+        this.chartOptions.series[0].data.push({x: this.chartHistory.Data[i].time, y: parseFloat(this.chartHistory.Data[i].close)});
+      }
     }
     this.updateFlag = true;
   }

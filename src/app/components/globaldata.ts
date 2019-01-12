@@ -59,6 +59,7 @@ export class CoinInfo {
       min : 0,
       hover: false,
       hover1 : false,
+      site: 'coincap'
     },
     {
       name:'Ethereum',
@@ -78,6 +79,7 @@ export class CoinInfo {
       min : 0,
       hover: false,
       hover1 : false,
+      site: 'coincap'
     },
     {
       name:'Litecoin',
@@ -97,6 +99,7 @@ export class CoinInfo {
       min : 0,
       hover: false,
       hover1 : false,
+      site: 'coincap'
     },
     {
       name:'MobilinkToken',
@@ -116,6 +119,7 @@ export class CoinInfo {
       min : 0,
       hover: false,
       hover1 : false,
+      site: 'cryptocompare'
     }
     /*{
       name:'Bitcoin Cash',
@@ -135,6 +139,7 @@ export class CoinInfo {
       min : 0,
       hover: false,
       hover1 : false,
+      site: 'coincap'
     },
     {
       name:'Dash',
@@ -154,6 +159,7 @@ export class CoinInfo {
       min : 0,
       hover: false,
       hover1 : false,
+      site: 'coincap'
     }*/    
   ]
 }
