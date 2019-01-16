@@ -21,8 +21,10 @@ export class AssetsComponent implements OnInit {
   }
 
   additionChanged(index: number) {
-    this.showCoinData[index].checked = !this.showCoinData[index].checked;
-    this.coinInfo.data[index].checked = this.showCoinData[index].checked;
+    if(index != 0 && index != 1) {
+      this.showCoinData[index].checked = !this.showCoinData[index].checked;
+      this.coinInfo.data[index].checked = this.showCoinData[index].checked;
+    }
   }
 
   searchCoin() {
