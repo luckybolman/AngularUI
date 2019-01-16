@@ -21,9 +21,11 @@ export class AssetsComponent implements OnInit {
   }
 
   additionChanged(index: number) {
-    if(index != 0 && index != 1) {
+    var symbol = this.showCoinData[index].symbol;
+    if(symbol != 'BTC' && symbol != 'ETH') {
       this.showCoinData[index].checked = !this.showCoinData[index].checked;
-      this.coinInfo.data[index].checked = this.showCoinData[index].checked;
+      var dataIndex: number = this.coinInfo.dataIndex[symbol];
+      this.coinInfo.data[dataIndex].checked = this.showCoinData[index].checked;
     }
   }
 
