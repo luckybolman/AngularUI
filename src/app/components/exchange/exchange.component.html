@@ -38,20 +38,21 @@
                         <li><button type="button" class="btn-pill" (click)="setHalfAmount()">HALF</button></li>
                         <li><button type="button" class="btn-pill" (click)="setMinAmount()">MIN</button></li>
                     </ul>
-                    <div>
+                    <div style="position:relative">
                         <form class="input-form">
                             <mat-form-field class="input-full-width">
                                 <input matInput class="btc-text border-bottom pt-3" name="sen_amount_c" [(ngModel)]="sendingAmountC" [ngStyle]="{'color':coin_data[sendCoin].color}" (keyup)="updateSendU()" >
-                              
                             </mat-form-field>
-
                             <mat-form-field class="input-full-width">
                                 <input matInput class="usd-text" [(ngModel)]="sendingAmountU" name="sen_amount_u" (keyup)="updateSendC()">                     
                             </mat-form-field>
                         </form>
+                        <div style="position:absolute; top: 20px; right: 0;">
+                            <p style="font-size: 20px; margin-bottom: 8px;" [ngStyle]="{'color':coin_data[sendCoin].color}">BTC</p>
+                            <p style="font-size: 18px; color:white;">USD</p>
+                        </div>
                     </div>
                 </div>               
-                
             </div>
             <div style="width : 80px; margin-top : 50px;text-align : center;" >
                 <mat-icon style="color: grey; font-size: 40px; cursor: pointer;" class="m-2" (click)='onClickComapreArrow()'>compare_arrows</mat-icon>
@@ -84,7 +85,7 @@
                             </a></li>                          
                         </ul>
                     </div>
-                    <div class="mt-6">
+                    <div class="mt-6" style="position:relative">
                         <form class="input-form">
                             <mat-form-field class="input-full-width">
                                 <input matInput class="eth-text border-bottom pt-3" [(ngModel)]="receivingAmountC" name="rec_amount_c" [ngStyle]="{'color':coin_data[receiveCoin].color}" (keyup)="updateReceiveU()">                         
@@ -93,9 +94,12 @@
                                 <input matInput class="usd-text"  name="rec_amount_u" [(ngModel)]="receivingAmountU" (keyup)="updateReceiveC()">                         
                             </mat-form-field>
                         </form>
+                        <div style="position:absolute; top: 20px; right: 0;">
+                            <p style="font-size: 20px; margin-bottom: 8px;" [ngStyle]="{'color':coin_data[receiveCoin].color}">BTC</p>
+                            <p style="font-size: 18px; color:white;">USD</p>
+                        </div>
                     </div>
                 </div>   
-                
             </div>
             <div class="w-100 h-25 text-center" *ngIf="errorMessage != ''">
                 <button class="btn_error">{{errorMessage}}</button>
