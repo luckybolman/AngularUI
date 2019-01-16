@@ -40,8 +40,18 @@ export class CoinInfo {
     return validCoins;
   }
 
+  dataIndex = {
+    'BTC' : 0,
+    'ETH' : 1,
+    'LTC' : 2,
+    'MOBI': 3,
+    'BCH' : 4,
+    'DASH': 5
+  }
+
   data = [
     {
+      index: 0,
       name:'Bitcoin',
       symbol:'BTC',
       market:'bitcoin',
@@ -62,6 +72,7 @@ export class CoinInfo {
       site: 'coincap'
     },
     {
+      index: 1,
       name:'Ethereum',
       symbol:'ETH',
       market:'ethereum',
@@ -82,6 +93,7 @@ export class CoinInfo {
       site: 'coincap'
     },
     {
+      index: 2,
       name:'Litecoin',
       symbol:'LTC',
       market:'litecoin',
@@ -102,6 +114,7 @@ export class CoinInfo {
       site: 'coincap'
     },
     {
+      index: 3,
       name:'MobilinkToken',
       symbol:'MOLK',
       market:'mobilinktoken',
@@ -122,6 +135,7 @@ export class CoinInfo {
       site: 'cryptocompare'
     }
     /*{
+      index: 4,
       name:'Bitcoin Cash',
       symbol:'BCH',
       market:'bitcoin cash',
@@ -142,6 +156,7 @@ export class CoinInfo {
       site: 'coincap'
     },
     {
+      index: 5,
       name:'Dash',
       symbol:'DASH',
       market:'dash',
