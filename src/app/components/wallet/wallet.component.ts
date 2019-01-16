@@ -112,10 +112,11 @@ export class WalletComponent implements OnInit {
       .subscribe(
         data => {
           let res:any = data;
-          if(res.status == "SUCCESS")  {
-            //res.balance
+          for(let k in res.balance) {
+            var dataIndex: number = this.coinInfo.dataIndex[k];
+            if(dataIndex != undefined)
+              this.coinInfo.data[dataIndex].balance = res.balance[k];
           }
-          console.log(res);
       });
     }
   }
