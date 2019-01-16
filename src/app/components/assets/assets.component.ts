@@ -24,8 +24,8 @@ export class AssetsComponent implements OnInit {
     var symbol = this.showCoinData[index].symbol;
     if(symbol != 'BTC' && symbol != 'ETH') {
       this.showCoinData[index].checked = !this.showCoinData[index].checked;
-      var dataIndex: number = this.coinInfo.dataIndex[symbol];
-      this.coinInfo.data[dataIndex].checked = this.showCoinData[index].checked;
+      //var dataIndex: number = this.coinInfo.dataIndex[symbol];
+      //this.coinInfo.data[dataIndex].checked = this.showCoinData[index].checked;
     }
   }
 

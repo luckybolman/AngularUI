@@ -139,6 +139,8 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.portfolios[i].volumn24 = (parseFloat(raw.TOTALVOLUME24HTO)/1e3).toFixed(2)+'K';
         else
           this.portfolios[i].volumn24 = parseFloat(raw.TOTALVOLUME24HTO).toFixed(2);
+
+        this.portfolios[i].value = (this.portfolios[i].price * this.portfolios[i].balance).toFixed(2);
       })
     }
   }

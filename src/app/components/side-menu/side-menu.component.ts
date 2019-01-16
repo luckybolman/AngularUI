@@ -19,7 +19,7 @@ export class SideMenuComponent implements OnInit {
 
   constructor(
     private breakpointObserver: BreakpointObserver, 
-    private route : Router, 
+    private router : Router, 
     private modalService: NgbModal,
     private http : HttpClient,
     public userInfo: UserInfo
@@ -78,6 +78,7 @@ export class SideMenuComponent implements OnInit {
     .subscribe(
       data => {
         this.setLoginFlag(username, data);
+        this.router.navigate(['/wallet'])
     });
   }
 

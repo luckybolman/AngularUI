@@ -44,7 +44,7 @@ export class CoinInfo {
     'BTC' : 0,
     'ETH' : 1,
     'LTC' : 2,
-    'MOBI': 3,
+    'MOLK': 3,
     'BCH' : 4,
     'DASH': 5
   }
