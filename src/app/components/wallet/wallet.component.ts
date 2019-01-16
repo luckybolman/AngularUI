@@ -14,7 +14,6 @@ import { HttpClient } from '@angular/common/http';
   providers: [MessageService]
 })
 export class WalletComponent implements OnInit {
-  selectedAddress: string;
   qrCodeAddress: string;
   sendingAmountC = '0.00';
   sendingAmountU = '0.00';
@@ -52,17 +51,22 @@ export class WalletComponent implements OnInit {
       if(page == 'send') {
         this.modalService.open(content, { centered: true });
       } else {
-        this.http.get(this._baseURL + '/wallet/address?username=' + this.userInfo.username + '&coin=' + this.selectedCoin.symbol)
-        .subscribe(
-          data => {
-            let res:any = data;
-            if(res.status == "SUCCESS" && res.address != '')  {
-              this.selectedAddress = res.address;
-              this.qrCodeAddress = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data="+this.selectedAddress;
-              this.modalService.open(content, { centered: true });
-            }
-            console.log(res);
-        });
+        if(this.selectedCoin.address) {
+          this.qrCodeAddress = "https://api.qrserver.com/v1/create-qr-code/?size=160x160&data="+this.selectedCoin.address;
+          this.modalService.open(content, { centered: true });
+        } else {
+          this.http.get(this._baseURL + '/wallet/address?username=' + this.userInfo.username + '&coin=' + this.selectedCoin.symbol)
+          .subscribe(
+            data => {
+              let res:any = data;
+              if(res.status == "SUCCESS" && res.address != '')  {
+                this.selectedCoin.address = res.address;
+                this.qrCodeAddress = "https://api.qrserver.com/v1/create-qr-code/?size=160x160&data="+this.selectedCoin.address;
+                this.modalService.open(content, { centered: true });
+              }
+              console.log(res);
+          });
+        }
       }
     } else {
       this.addSingle();
@@ -96,7 +100,7 @@ export class WalletComponent implements OnInit {
   copyAddress() {
     var icopy = document.createElement("input");
     document.body.appendChild(icopy);
-    icopy.setAttribute('value', this.selectedAddress);
+    icopy.setAttribute('value', this.selectedCoin.address);
     icopy.select();
     document.execCommand("copy");
     document.body.removeChild(icopy);
