@@ -1,16 +1,16 @@
 <div class="d-flex background-main">
     <div style="width: 200px;">
-       <app-side-menu name="wallet"></app-side-menu>
+      <app-side-menu name="wallet"></app-side-menu>
     </div>
     <div class="w-100 align-self-stretch text-info">
       <ng-template #send let-modal>
         <div style="background-color: #1d2b3a;">
-              <img src="./assets/close_button.png" class="close_button" (click)="modal.dismiss('Cross click')">
+          <img src="./assets/close_button.png" class="close_button" (click)="modal.dismiss('Cross click')">
         </div>
         <div style="background-color: #1d2b3a;">
-            <div style="text-align:center;">
-                <img src={{selectedIcon}} alt="LOGO" class="coin_logo">      
-            </div>
+          <div style="text-align:center;">
+            <img src={{selectedCoin.icon}} alt="LOGO" class="coin_logo">      
+          </div>
         </div>
         <div class="modal-body text-center">
           <div style="display:flex;">
@@ -20,88 +20,79 @@
             <div style="display:inline-block;">
               <form class="input-form" >
                 <mat-form-field class="input-full-width">
-                    <input matInput  placeholder="Send to address..." class="btc-text" [ngStyle]="{'color':buttonColor,'border-color':buttonColor}">
+                  <input matInput class="btc-text" [ngStyle]="{'color':selectedCoin.color,'border-color':selectedCoin.color}">
                 </mat-form-field>
               </form>
             </div>
           </div>
-
-          <div style="display:flex;margin-top:25px;">
+          <div style="display:flex;margin-top:20px;">
             <div style="display:inline-block;">
               <img src="./assets/amount_icon.png" class="copy_icon" style="margin-top:15px;">
             </div>
             <div style="display:inline-block;">
-              <form class="input-form">
-                  <mat-form-field class="input-full-width">
-                      <input matInput class="btc-text" [ngStyle]="{'color':buttonColor,'border-color':buttonColor}">                  
-                  </mat-form-field>
-
-                  <mat-form-field class="input-full-width">
-                      <input matInput class="usd-text">                    
-                  </mat-form-field>
-              </form>
+              <input type="text" class="input_amountC" [(ngModel)] = "sendingAmountC" (keyup)="onChangeC()" [ngStyle]="{'color':selectedCoin.color,'border-color':selectedCoin.color}">
+              <input type="text" class="input_amountU" [(ngModel)] = "sendingAmountU" (keyup)="onChangeU()">
             </div>
             <div style="display:inline-block;">
-              <p [ngStyle]="{'color':buttonColor}" style="margin-top:15px;">{{selectedCoin}}</p>
+              <p [ngStyle]="{'color':selectedCoin.color}" style="font-size: 20px;  margin-top:6px; position: absolute; right:40px">{{selectedCoin.symbol}}</p>
             </div>
             <div style="display:inline-block;">
-                <p style="color:white;margin-top:50px;margin-left:-25px;">USD</p>
-                </div>
+              <p style="font-size: 18px; color:white; margin-top:40px;position: absolute; right:40px">USD</p>
+            </div>
           </div>
-          <div>
-            <button class="modal_button" [ngStyle]="{'background-color':buttonColor}">
+          <div style="margin-top:50px;">
+            <button class="modal_button" [ngStyle]="{'background-color':selectedCoin.color}">
               Send
             </button>
           </div>
-           
-       </div>
+        </div>
       </ng-template>
       <ng-template #receive let-modal>
         <div style="background-color: #1d2b3a;">
-            <img src="./assets/close_button.png" class="close_button" (click)="modal.dismiss('Cross click')">
+          <img src="./assets/close_button.png" class="close_button" (click)="modal.dismiss('Cross click')">
         </div>
         <div style="background-color: #1d2b3a;">
           <div style="text-align:center;">
-              <img src={{selectedIcon}} alt="LOGO" class="coin_logo">      
+            <img src={{selectedCoin.icon}} alt="LOGO" class="coin_logo">      
           </div>
         </div>
         <div class="modal-body text-center">
-            <h4 style="color:white;margin-top:30px;">Your address</h4>
-            <p style="color:white;">{{selectedAddress}}</p>
-            <img src="./assets/copy_icon.png" class="copy_icon" (click)='copyAddress()'>
+          <h4 style="color:white;margin-top:30px;">Your address</h4>
+          <p style="color:white;">{{selectedAddress}}</p>
+          <img src="./assets/copy_icon.png" class="copy_icon" (click)='copyAddress()'>
         </div>
         <div class="qr_code">
           <img [src]="qrCodeAddress">
           <p style="font-size:15px;color:white;margin-top:10px;">Scan address</p>
         </div>
       </ng-template>
-      <div style="width:200px;float:left;border-right:2px solid;padding-right:20px;" [ngStyle]="{'border-color':buttonColor}">
-          <nav>
-            <ul>
-              <li role="menuitem"  *ngFor="let coin of coin_data; let i = index" (click)="setCoin(coin.symbol)">
-                <div class="btc_title">
-                  {{coin.name}}
-                </div>
-                <div class="coin_amount">
-                  {{coin.balance}} {{coin.symbol}}
-                </div>
-              </li>
-            </ul>
-          </nav>
+      <div style="width:200px;float:left;border-right:2px solid;padding-right:20px;" [ngStyle]="{'border-color':selectedCoin.color}">
+        <nav>
+          <ul>
+            <li role="menuitem"  *ngFor="let coin of coin_data; let i = index" (click)="setCoin(coin)">
+              <div class="btc_title">
+                {{coin.name}}
+              </div>
+              <div class="coin_amount">
+                {{coin.balance}} {{coin.symbol}}
+              </div>
+            </li>
+          </ul>
+        </nav>
       </div>
       <div style="right:0px; position:absolute;">
         <p-toast></p-toast>
       </div>
       <div style="float:left;width:calc(100% - 200px);text-align: center;">
           <div style="margin-top:20px;">
-                <img src={{selectedIcon}} alt="LOGO" class="coin_logo">        
+              <img src={{selectedCoin.icon}} alt="LOGO" class="coin_logo">        
           </div>
           <div>
           <div style="display:inline-block;">
-              <div style="font-size:55px;margin-right:5px;" [ngStyle]="{'color':buttonColor}">{{walletBalance[selectedCoin]}}</div> 
+              <div style="font-size:55px;margin-right:5px;" [ngStyle]="{'color':selectedCoin.color}">{{selectedCoin.balance}}</div> 
           </div>
-          <div style="display:inline-block;font-size:26px;" [ngStyle]="{'color':buttonColor}">
-              {{selectedCoin}}
+          <div style="display:inline-block;font-size:26px;" [ngStyle]="{'color':selectedCoin.color}">
+              {{selectedCoin.symbol}}
           </div>
           </div>
           <div>
@@ -117,14 +108,14 @@
           </div>
           <div style="margin-top:20px;">
             <div style="display:inline-block;">
-              <button class="main_btn" [ngStyle]="{'background-color':buttonColor}" (click)="openModal(send)">
+              <button class="main_btn" [ngStyle]="{'background-color':selectedCoin.color}" (click)="openModal(send, 'send')">
                 Send
               </button>
             </div>
             <div style="display:inline-block">
-              <button class="main_btn" [ngStyle]="{'background-color':buttonColor}" (click)="openModal(receive)">
+              <button class="main_btn" [ngStyle]="{'background-color':selectedCoin.color}" (click)="openModal(receive, 'receive')">
                 Receive
-            </button>
+              </button>
             </div>
           </div>
       </div>

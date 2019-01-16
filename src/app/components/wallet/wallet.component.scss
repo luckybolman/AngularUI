@@ -122,7 +122,7 @@ nav{
 
 .input-form {
     width: 390px;
-    margin-left: 10px;
+    margin-left: 15px;
     .input-full-width{
         width:390px;
         .usd-text {
@@ -135,7 +135,24 @@ nav{
             border-bottom: 2px solid;
         }
     }
-    
+}
+
+.input_amountC,
+.input_amountU {
+    width: 390px;
+    padding: 0px;
+    font-size: 25px;
+    color: white;
+    background-color: transparent;
+    border:none;
+    text-align: left;
+    &:focus { 
+        outline: none;
+    }
+}
+
+.input_amountC {
+    border-bottom: 2px solid;
 }
 
 

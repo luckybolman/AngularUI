@@ -14,14 +14,11 @@ import { HttpClient } from '@angular/common/http';
   providers: [MessageService]
 })
 export class WalletComponent implements OnInit {
-  selectedCoin: string;
-  buttonColor: string;
-  selectedIcon: string;
   selectedAddress: string;
   qrCodeAddress: string;
-  sendingAmountC =0.00;
-  sendingAmountU = 0.00;
-  walletBalance: any;
+  sendingAmountC = '0.00';
+  sendingAmountU = '0.00';
+  selectedCoin: any;
   coin_data : any;
   _baseURL: string;
 
@@ -35,41 +32,38 @@ export class WalletComponent implements OnInit {
     private messageService: MessageService,
     private http : HttpClient
   ) {
-   this.setCoin('BTC');
     this._baseURL = AppConstants.baseURL;
   }
 
   ngOnInit() {
     this.coin_data = this.coinInfo.getCheckedCoins();
-    this.walletBalance = {
-      'BTC' : 0,
-      'ETH' : 0,
-      'LTC' : 0,
-      'MOBI' : 0,
-    }
+    if(this.coin_data.length > 0)
+      this.setCoin(this.coin_data[0]);
     this.getBalance();
   }
 
-  setCoin(coin:string){
+  setCoin(coin:any){
     this.selectedCoin = coin;
-    var data = this.coinInfo.getDataFromSymbol(coin);
-    this.buttonColor = data.color;
-    this.selectedIcon = data.icon;
   }
 
-  openModal(content){
+  openModal(content, page){
+    //this.modalService.open(content, { centered: true });
     if(this.userInfo.bLogined) {
-      this.http.get(this._baseURL + '/wallet/address?username=' + this.userInfo.username + '&coin=' + this.selectedCoin)
-      .subscribe(
-        data => {
-          let res:any = data;
-          if(res.status == "SUCCESS" && res.address != '')  {
-            this.selectedAddress = res.address;
-            this.qrCodeAddress = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data="+this.selectedAddress;
-            this.modalService.open(content, { centered: true });
-          }
-          console.log(res);
-      });
+      if(page == 'send') {
+        this.modalService.open(content, { centered: true });
+      } else {
+        this.http.get(this._baseURL + '/wallet/address?username=' + this.userInfo.username + '&coin=' + this.selectedCoin.symbol)
+        .subscribe(
+          data => {
+            let res:any = data;
+            if(res.status == "SUCCESS" && res.address != '')  {
+              this.selectedAddress = res.address;
+              this.qrCodeAddress = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data="+this.selectedAddress;
+              this.modalService.open(content, { centered: true });
+            }
+            console.log(res);
+        });
+      }
     } else {
       this.addSingle();
     }
@@ -115,13 +109,24 @@ export class WalletComponent implements OnInit {
         data => {
           let res:any = data;
           if(res.status == "SUCCESS")  {
-            this.walletBalance['BTC'] = res.btc_balance;
-            this.walletBalance['ETH'] = res.eth_balance;
-            this.walletBalance['LTC'] = res.ltc_balance;
-            this.walletBalance['MOBI'] = res.mobi_balance;
+            //res.balance
           }
           console.log(res);
       });
+    }
+  }
+
+  onChangeC() {
+    let amountC = parseFloat(this.sendingAmountC)
+    if(amountC > 0) {
+      this.sendingAmountU = (amountC * this.selectedCoin.price).toFixed(2);
+    }
+  }
+
+  onChangeU() {
+    let amountU = parseFloat(this.sendingAmountU)
+    if(amountU > 0) {
+      this.sendingAmountC = (amountU / this.selectedCoin.price).toFixed(8);
     }
   }
 }
