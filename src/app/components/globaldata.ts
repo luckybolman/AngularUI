@@ -14,6 +14,13 @@ export class UserInfo {
 export class MarketInfo {
   market_rate: number = 0;
   market_refresh_timerid: any;
+  exchange_refresh_timerid: any;
+  exchange_id: string = '';
+  exchange_step: number = 0;
+  ex_sendingAmountC: string = '0.00';
+  ex_receivingAmountC: string = '0.00';
+  ex_sendingAmountU: string = '0.00';
+  ex_receivingAmountU: string = '0.00';
 }
 
 @Injectable()

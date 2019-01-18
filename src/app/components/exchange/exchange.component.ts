@@ -9,7 +9,6 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ExchangeComponent implements OnInit {
 
-  step = 0;
   sendingAmountC = '0.00';
   sendingAmountU = '0.00';
   receivingAmountC = '0.00'; 
@@ -18,7 +17,7 @@ export class ExchangeComponent implements OnInit {
   receiveCoin: any;
   coin_data: any;
   _baseURL: string;
-
+  
   constructor(
     public marketInfo: MarketInfo,
     public coinInfo: CoinInfo,
@@ -26,6 +25,10 @@ export class ExchangeComponent implements OnInit {
     private http : HttpClient
   ) {
     this._baseURL = AppConstants.baseURL;
+    this.sendingAmountC = this.marketInfo.ex_sendingAmountC;
+    this.receivingAmountC = this.marketInfo.ex_receivingAmountC;
+    this.sendingAmountU = this.marketInfo.ex_sendingAmountU;
+    this.receivingAmountU = this.marketInfo.ex_receivingAmountU;
   }
 
   // cryptFormControl = new FormControl('',[Validators.required,Validators.email]);
@@ -137,27 +140,6 @@ export class ExchangeComponent implements OnInit {
     return parseFloat(num).toString();
   }
 
-  startExchange(){
-    if(this.userInfo.bLogined) {
-      this.http.post(this._baseURL + "/market/exchange",
-      {
-        "username": this.userInfo.username,
-      })
-      .subscribe(
-        data => {
-          this.step = 1;
-        },
-        error => {
-            console.log("Error", error);
-        }
-      );           
-    }
-    /*let inteval = setInterval(() => {
-      this.step ++;
-      if(this.step==3) clearInterval(inteval);
-    }, 5000);*/
-  }
-
   getCoinsRate(price1 : any, price2 : any) {
     if(price2 && this.marketInfo.market_rate) {
       let rate = 1 - this.marketInfo.market_rate / 100;
@@ -168,9 +150,6 @@ export class ExchangeComponent implements OnInit {
     }
   }
 
-  endExchange(){
-    this.step = 0;
-  }
   changeStyle($event, i){
     if(this.coin_data[i].name != this.sendCoin.name)
       this.coin_data[i].hover = $event.type == 'mouseover';
@@ -189,4 +168,62 @@ export class ExchangeComponent implements OnInit {
     this.sendingAmountC = '0.00';
     this.checkError();
   } 
+
+
+  startExchange(){
+    if(this.userInfo.bLogined) {
+      this.http.post(this._baseURL + "/market/exchange",
+      {
+        "username": this.userInfo.username,
+        "pair": this.sendCoin.symbol + '_' + this.receiveCoin.symbol,
+        "sendamount": this.sendingAmountU,
+        "recvamount": this.receivingAmountU
+      })
+      .subscribe(
+        data => {
+          let res:any = data;
+          if(res.status == "SUCCESS" )  {
+            this.marketInfo.ex_sendingAmountC = this.sendingAmountC;
+            this.marketInfo.ex_receivingAmountC = this.receivingAmountC;
+            this.marketInfo.ex_sendingAmountU = this.sendingAmountU;
+            this.marketInfo.ex_receivingAmountU = this.receivingAmountU;
+            
+            this.marketInfo.exchange_id = res.exchange_id;
+            if(!this.marketInfo.exchange_refresh_timerid) {
+              this.marketInfo.exchange_refresh_timerid = setInterval(()=>{
+                this.refreshExchangeStep();
+              }, 10000);       
+            }
+          }
+        },
+        error => {
+            console.log("Error", error);
+        }
+      );           
+    }
+  }
+
+  private refreshExchangeStep() {
+    this.http.get(this._baseURL + '/market/exchange_step?exchangeid' + this.marketInfo.exchange_id)
+    .subscribe(
+      data => {
+        let res: any = data;
+        if(res.status == "SUCCESS" )  {
+          this.marketInfo.exchange_step ++;
+          if(this.marketInfo.exchange_step==3) clearInterval(this.marketInfo.exchange_refresh_timerid);
+        }
+    });
+  }
+
+  endExchange(){
+    this.marketInfo.exchange_step = 0;
+    this.sendingAmountC = '0.00';
+    this.sendingAmountU = '0.00';
+    this.receivingAmountC = '0.00'; 
+    this.receivingAmountU = '0.00';
+    this.marketInfo.ex_sendingAmountC = '0.00';
+    this.marketInfo.ex_receivingAmountC = '0.00';
+    this.marketInfo.ex_sendingAmountU = '0.00';
+    this.marketInfo.ex_receivingAmountU = '0.00';
+  }
 }

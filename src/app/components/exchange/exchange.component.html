@@ -2,7 +2,7 @@
     <div style="width: 200px;">
        <app-side-menu name="exchange"></app-side-menu>
     </div>
-    <div class="w-100 align-self-stretch text-info" *ngIf="step==0">
+    <div class="w-100 align-self-stretch text-info" *ngIf="marketInfo.exchange_step==0">
         <div class="row justify-content-center h-50">
             <div class="d-flex py-2 px-4 h-75" style="width : 45%">
                 <div class="text-center w-100">
@@ -138,11 +138,11 @@
         </div>
 
     </div>
-    <div *ngIf="step>0">
+    <div *ngIf="marketInfo.exchange_step>0">
         <div class="row justify-content-center text-center h-50">
             <div class="col-4 text-center">
-                <div [ngClass]="step==1?'bg-circle':'bg-circle-disable'">                    
-                    <div [ngClass]="step==1?'content-wrapper':''">
+                <div [ngClass]="marketInfo.exchange_step==1?'bg-circle':'bg-circle-disable'">                    
+                    <div [ngClass]="marketInfo.exchange_step==1?'content-wrapper':''">
                         STEP 1<br>
                         <i class="fa fa-send" style="font-size:70px"></i>
                         <br>
@@ -151,8 +151,8 @@
                 </div>              
             </div>
             <div class="col-4">
-                <div [ngClass]="step==2?'bg-circle':'bg-circle-disable'">
-                        <div [ngClass]="step==2?'content-wrapper':''">
+                <div [ngClass]="marketInfo.exchange_step==2?'bg-circle':'bg-circle-disable'">
+                        <div [ngClass]="marketInfo.exchange_step==2?'content-wrapper':''">
                         STEP 2<br>
                         <i class="fa fa-cogs" style="font-size:70px"></i><br>
                         EXCHANGING
@@ -160,8 +160,8 @@
                 </div>                
             </div>
             <div class="col-4">
-                <div [ngClass]="step==3?'bg-circle':'bg-circle-disable'">
-                        <div [ngClass]="step==3?'content-wrapper':''">
+                <div [ngClass]="marketInfo.exchange_step==3?'bg-circle':'bg-circle-disable'">
+                        <div [ngClass]="marketInfo.exchange_step==3?'content-wrapper':''">
                         STEP 3<br>
                         <i class="fa fa-database" style="font-size:70px"></i><br>
                         COMPLETE
@@ -170,13 +170,13 @@
             </div>
         </div>
         <div class="h-25 text-white">
-            <h1 class="text-center" *ngIf="step==1">
+            <h1 class="text-center" *ngIf="marketInfo.exchange_step==1">
                 Sending...
             </h1>            
-            <h1 class="text-center" *ngIf="step==2">
+            <h1 class="text-center" *ngIf="marketInfo.exchange_step==2">
                 Exchanging...
             </h1>
-            <h1 class="text-center" *ngIf="step==3">
+            <h1 class="text-center" *ngIf="marketInfo.exchange_step==3">
                 Exchange Complete
             </h1>
             <div class="p-5">
@@ -186,8 +186,8 @@
         <div class="row justify-content-center">
             <div class="d-flex justify-content-end text-lightgrey p-2">
                 <div class="text-right pr-2">
-                    <div *ngIf="step<3">Exchanging</div>
-                    <div *ngIf="step==3">Exchanged</div>
+                    <div *ngIf="marketInfo.exchange_step<3">Exchanging</div>
+                    <div *ngIf="marketInfo.exchange_step==3">Exchanged</div>
                     <span class="btc-text" [ngStyle]="{'color':sendCoin.color}">{{sendingAmountC}}{{sendCoin.symbol}}</span><br>
                     ${{sendingAmountU}}
                 </div> 
@@ -204,14 +204,14 @@
                     <img [src]="receiveCoin.icon" style="height : 80px;">
                 </div>                
                 <div class="text-left pl-2">
-                    <div *ngIf="step<3">Receiving</div>
-                    <div *ngIf="step==3">Received</div>
+                    <div *ngIf="marketInfo.exchange_step<3">Receiving</div>
+                    <div *ngIf="marketInfo.exchange_step==3">Received</div>
                     <span class="eth-text" [ngStyle]="{'color':receiveCoin.color}" >{{receivingAmountC}}{{receiveCoin.symbol}}</span><br>
                     ${{receivingAmountU}}
                 </div>                
             </div>           
         </div>
-        <div class="text-center" *ngIf="step==3">
+        <div class="text-center" *ngIf="marketInfo.exchange_step==3">
             <button class="btn_end" (click)='endExchange()'>Close</button>
         </div>
     </div>
