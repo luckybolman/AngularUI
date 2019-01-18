@@ -59,10 +59,13 @@ export class SideMenuComponent implements OnInit {
       this.closeModal();
       this.userInfo.bLogined = true;
       this.userInfo.username = username;
+      this.userInfo.userid = res.userid;
       this.errMessage = '';
+      this.router.navigate(['/wallet']);
     } else {
       this.userInfo.bLogined = false;
       this.userInfo.username = '';
+      this.userInfo.userid = '';
       if(res.msg) 
         this.errMessage = res.msg; 
       else 
@@ -78,7 +81,6 @@ export class SideMenuComponent implements OnInit {
     .subscribe(
       data => {
         this.setLoginFlag(username, data);
-        this.router.navigate(['/wallet'])
     });
   }
 

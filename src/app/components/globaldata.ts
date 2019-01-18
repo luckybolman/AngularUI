@@ -8,6 +8,7 @@ export class AppConstants {
 export class UserInfo {
   bLogined: boolean = false;
   username: string = '';
+  userid: string = '';
 }
 
 @Injectable()

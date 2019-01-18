@@ -175,6 +175,7 @@ export class ExchangeComponent implements OnInit {
       this.http.post(this._baseURL + "/market/exchange",
       {
         "username": this.userInfo.username,
+        "userid": this.userInfo.userid,
         "pair": this.sendCoin.symbol + '_' + this.receiveCoin.symbol,
         "sendamount": this.sendingAmountU,
         "recvamount": this.receivingAmountU
@@ -204,7 +205,7 @@ export class ExchangeComponent implements OnInit {
   }
 
   private refreshExchangeStep() {
-    this.http.get(this._baseURL + '/market/exchange_step?exchangeid' + this.marketInfo.exchange_id)
+    this.http.get(this._baseURL + '/market/exchange_step?exchangeid' + this.marketInfo.exchange_id + '&userid=' + this.userInfo.userid)
     .subscribe(
       data => {
         let res: any = data;

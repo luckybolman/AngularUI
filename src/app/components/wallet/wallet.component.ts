@@ -55,7 +55,7 @@ export class WalletComponent implements OnInit {
           this.qrCodeAddress = "https://api.qrserver.com/v1/create-qr-code/?size=160x160&data="+this.selectedCoin.address;
           this.modalService.open(content, { centered: true });
         } else {
-          this.http.get(this._baseURL + '/wallet/address?username=' + this.userInfo.username + '&coin=' + this.selectedCoin.symbol)
+          this.http.get(this._baseURL + '/wallet/address?username=' + this.userInfo.username + '&userid=' + this.userInfo.userid + '&coin=' + this.selectedCoin.symbol)
           .subscribe(
             data => {
               let res:any = data;
@@ -108,7 +108,7 @@ export class WalletComponent implements OnInit {
 
   getBalance() {
     if(this.userInfo.bLogined) {
-      this.http.get(this._baseURL + '/wallet/balances?username=' + this.userInfo.username)
+      this.http.get(this._baseURL + '/wallet/balances?username=' + this.userInfo.username + '&userid=' + this.userInfo.userid)
       .subscribe(
         data => {
           let res:any = data;
