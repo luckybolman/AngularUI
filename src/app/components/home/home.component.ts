@@ -99,8 +99,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.getData();
     this.getMarketRate();
 
-    if(!this.marketInfo.market_refresh_interval) {
-      this.marketInfo.market_refresh_interval = setInterval(()=>{
+    if(!this.marketInfo.market_refresh_timerid) {
+      this.marketInfo.market_refresh_timerid = setInterval(()=>{
         this.getData();
         this.getMarketRate();
       }, 10000);       

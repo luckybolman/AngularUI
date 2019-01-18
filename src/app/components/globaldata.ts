@@ -12,14 +12,8 @@ export class UserInfo {
 
 @Injectable()
 export class MarketInfo {
-  coin_prices = {
-    'BTC' : 0,
-    'ETH' : 0,
-    'LTC' : 0,
-    'MOLK' : 0,
-  };
   market_rate: number = 0;
-  market_refresh_interval: any;
+  market_refresh_timerid: any;
 }
 
 @Injectable()
