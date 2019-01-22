@@ -176,7 +176,8 @@ export class ExchangeComponent implements OnInit {
       {
         "username": this.userInfo.username,
         "userid": this.userInfo.userid,
-        "pair": this.sendCoin.symbol + '_' + this.receiveCoin.symbol,
+        "sendcoin": this.sendCoin.symbol,
+        "recvcoin": this.receiveCoin.symbol,
         "sendamount": this.sendingAmountU,
         "recvamount": this.receivingAmountU
       })
