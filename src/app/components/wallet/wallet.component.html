@@ -20,7 +20,7 @@
             <div style="display:inline-block;">
               <form class="input-form" >
                 <mat-form-field class="input-full-width">
-                  <input matInput class="btc-text" [ngStyle]="{'color':selectedCoin.color,'border-color':selectedCoin.color}">
+                  <input matInput #sendaddr class="btc-text" [ngStyle]="{'color':selectedCoin.color,'border-color':selectedCoin.color}">
                 </mat-form-field>
               </form>
             </div>
@@ -41,7 +41,7 @@
             </div>
           </div>
           <div style="margin-top:50px;">
-            <button class="modal_button" [ngStyle]="{'background-color':selectedCoin.color}">
+            <button class="modal_button" [ngStyle]="{'background-color':selectedCoin.color}" (click)="onSendCoin(sendaddr.value)">
               Send
             </button>
           </div>

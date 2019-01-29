@@ -141,6 +141,35 @@ export class WalletComponent implements OnInit {
       this.sendingAmountC = (amountU / this.selectedCoin.price).toFixed(8);
     }
   }
+
+  onSendCoin(sendaddr) {
+    if(!sendaddr || parseFloat(this.sendingAmountC) == 0)  
+      return;
+    
+    this.modalService.dismissAll();
+
+    if(this.userInfo.bLogined) {
+      this.http.post(this._baseURL + "/wallet/send",
+      {
+        "username": this.userInfo.username,
+        "userid": this.userInfo.userid,
+        "coin": this.selectedCoin.symbol,
+        "amount": this.sendingAmountC,
+        "address": sendaddr
+      })
+      .subscribe(
+        data => {
+          let res:any = data;
+          if(res.status == "SUCCESS" )  {
+            
+          }
+        },
+        error => {
+            console.log("Error", error);
+        }
+      );           
+    }
+  }
 }
 
 
