@@ -2,9 +2,104 @@
   <div style="width: 200px;">
      <app-side-menu name="settings"></app-side-menu>
   </div>
-  <div class="w-100 align-self-stretch text-info" style="margin-left:50px;">
+  <div class="w-100 align-self-stretch text-info" style="margin: 20px 50px;">
     <div class="show_hide">
-      Settings
+      Account Overview
+    </div>
+    <div class="account_region">
+      <div class="row">
+        <div class="col">
+          <div class="input_title">
+            User Name
+          </div>
+          <div class="item_content">
+            {{username}}
+          </div>
+        </div>
+        <div class="col">
+          <div class="input_title">
+            Full Name
+          </div>
+          <input type="text" class="input_content" [(ngModel)] = "fullname" (keyup)="onChangeAccount()">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="input_title">
+            Address
+          </div>
+          <input type="text" class="input_content" [(ngModel)] = "address" (keyup)="onChangeAccount()">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="input_title">
+            Phone Number
+          </div>
+          <input type="text" class="input_content" [(ngModel)] = "phonenumber" (keyup)="onChangeAccount()">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="input_title">
+            Email Address
+          </div>
+          <div class="item_content">
+            {{email}}
+          </div>
+        </div>
+        <div class="col">
+          <div class="input_title">
+            Email Confrimed
+          </div>
+          <div class="input_content">
+            Yes
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button class="update_button">
+            Update Account
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="show_hide">
+      Account Password
+    </div>
+    <div class="account_region">
+      <div class="row">
+        <div class="col">
+          <div class="input_title">
+            Old Password
+          </div>
+          <input type="password" class="input_content" [(ngModel)] = "oldpassword" (keyup)="onChangePassword()">
+        </div>
+        <div class="col">
+          <div>
+            <div>
+              <div class="input_title">
+                New Password
+              </div>
+              <input type="password" class="input_password" [(ngModel)] = "newpassword" (keyup)="onChangePassword()">
+            </div>
+            <div>
+              <div class="input_title">
+                Repeat Password
+              </div>
+              <input type="password" class="input_content" [(ngModel)] = "repeatpassword" (keyup)="onChangePassword()">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button class="update_button">
+            Update Password
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
