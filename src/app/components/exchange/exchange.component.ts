@@ -178,8 +178,8 @@ export class ExchangeComponent implements OnInit {
         "userid": this.userInfo.userid,
         "sendcoin": this.sendCoin.symbol,
         "recvcoin": this.receiveCoin.symbol,
-        "sendamount": this.sendingAmountU,
-        "recvamount": this.receivingAmountU
+        "sendamount": this.sendingAmountC,
+        "recvamount": this.receivingAmountC
       })
       .subscribe(
         data => {

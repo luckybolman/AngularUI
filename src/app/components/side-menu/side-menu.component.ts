@@ -74,10 +74,13 @@ export class SideMenuComponent implements OnInit {
   }
 
   onLogin(username, password) {
+    this.errMessage = '';
     if(username.length == 0 || password.length == 0)
       return "Please input Username and Password";
 
-    this.http.get(this._baseURL + '/user/login?username=' + username + '&password=' + password)
+    var pwd = password.replace("#", "%23");
+
+    this.http.get(this._baseURL + '/user/login?username=' + username + '&password=' + pwd)
     .subscribe(
       data => {
         this.setLoginFlag(username, data);
@@ -85,6 +88,7 @@ export class SideMenuComponent implements OnInit {
   }
 
   onRegister(username, email, password) {
+    this.errMessage = '';
     if(username.length == 0 || email.length == 0 || password.length == 0)
       return "Please input Username and Password";
 
