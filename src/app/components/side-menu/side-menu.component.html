@@ -85,6 +85,10 @@
           <i class="fa fa-plus-square"></i>
           &nbsp;&nbsp; Assets
         </a>
+        <a mat-list-item routerLink="/settings" [ngClass]="pageName=='settings'?'focus':''" [ngStyle]="{'display': !userInfo.bLogined? 'none' : ''}">      
+          <i class="fa fa-cogs"></i>
+          &nbsp;&nbsp; Settings
+        </a>
         <div class="fixed-bottom bottom-menu">
             <!-- <a mat-list-item href="/setting">      
               <i class="fa fa-sliders"></i>

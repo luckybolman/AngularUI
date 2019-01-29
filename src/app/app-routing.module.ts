@@ -6,6 +6,7 @@ import { WalletComponent } from './components/wallet/wallet.component';
 import { BackupComponent } from './components/backup/backup.component';
 import { ChartComponent } from './components/chart/chart.component';
 import { AssetsComponent } from './components/assets/assets.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 const routes: Routes = [
     {
@@ -31,6 +32,11 @@ const routes: Routes = [
     {
         path : 'assets',
         component: AssetsComponent
+    },
+    {
+        path : 'settings',
+        component: SettingsComponent
+    }
     }
 ];
 

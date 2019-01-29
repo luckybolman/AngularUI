@@ -38,6 +38,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import { ChartComponent } from './components/chart/chart.component';
 import { AssetsComponent } from './components/assets/assets.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
@@ -61,6 +62,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BackupComponent,
     ChartComponent,
     AssetsComponent
+    SettingsComponent,
   ],
   imports: [
     HighchartsChartModule,
