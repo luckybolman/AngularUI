@@ -143,25 +143,26 @@ export class WalletComponent implements OnInit {
   }
 
   onSendCoin(sendaddr) {
-    if(!sendaddr || parseFloat(this.sendingAmountC) == 0)  
-      return;
-    
-    this.modalService.dismissAll();
+    var sendAmount = parseFloat(this.sendingAmountC);
 
-    if(this.userInfo.bLogined) {
+    if(!sendaddr || sendAmount == 0)  
+      return;
+
+    if(this.userInfo.bLogined && this.selectedCoin.balance >= sendAmount) {
       this.http.post(this._baseURL + "/wallet/send",
       {
         "username": this.userInfo.username,
         "userid": this.userInfo.userid,
         "coin": this.selectedCoin.symbol,
-        "amount": this.sendingAmountC,
+        "amount": sendAmount,
         "address": sendaddr
       })
       .subscribe(
         data => {
           let res:any = data;
           if(res.status == "SUCCESS" )  {
-            
+            this.modalService.dismissAll();
+            this.selectedCoin.balance = res.balance;
           }
         },
         error => {
