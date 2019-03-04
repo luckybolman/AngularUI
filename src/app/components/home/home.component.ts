@@ -114,9 +114,37 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private getData(){
     for(let i=0; i<this.portfolios.length; i++){
-      this.apiservice.getMarketInfo(this.portfolios[i].symbol)
+      this.apiservice.getMarketInfo(this.portfolios[i].market)
       .subscribe(data=>{
         let res:any = data;
+        let raw = res[0];
+
+        this.portfolios[i].price = raw.price_usd > 1 ? parseFloat(raw.price_usd).toFixed(2) : parseFloat(raw.price_usd).toFixed(4); 
+        this.portfolios[i].change24 = parseFloat(raw.percent_change_24h).toFixed(2);
+
+        let market_cap = raw.market_cap_usd ? raw.market_cap_usd : 130500000;
+        if(parseFloat(market_cap)>=1e9)
+          this.portfolios[i].cap = (parseFloat(market_cap)/1e9).toFixed(2)+'B';
+        else if(parseFloat(market_cap)>=1e6)        
+          this.portfolios[i].cap = (parseFloat(market_cap)/1e6).toFixed(2)+'M';
+        else if(parseFloat(market_cap)>=1e3)
+          this.portfolios[i].cap = (parseFloat(market_cap)/1e3).toFixed(2)+'K';
+        else
+          this.portfolios[i].cap = parseFloat(market_cap).toFixed(2);
+        
+        if(parseFloat(raw['24h_volume_usd'])>=1e9)
+          this.portfolios[i].volumn24 = (parseFloat(raw['24h_volume_usd'])/1e9).toFixed(2)+'B';
+        else if(parseFloat(raw['24h_volume_usd'])>=1e6)        
+          this.portfolios[i].volumn24 = (parseFloat(raw['24h_volume_usd'])/1e6).toFixed(2)+'M';
+        else if(parseFloat(raw['24h_volume_usd'])>=1e3)
+          this.portfolios[i].volumn24 = (parseFloat(raw['24h_volume_usd'])/1e3).toFixed(2)+'K';
+        else
+          this.portfolios[i].volumn24 = parseFloat(raw['24h_volume_usd']).toFixed(2);
+
+        this.portfolios[i].value = (this.portfolios[i].price * this.portfolios[i].balance).toFixed(2);
+
+
+        /*let res:any = data;
         let raw = res['RAW'][this.portfolios[i].symbol]['USD'];
 
         this.portfolios[i].price = raw.PRICE > 1 ? parseFloat(raw.PRICE).toFixed(2) : parseFloat(raw.PRICE).toFixed(4); 
@@ -140,14 +168,14 @@ export class HomeComponent implements OnInit, OnDestroy {
         else
           this.portfolios[i].volumn24 = parseFloat(raw.TOTALVOLUME24HTO).toFixed(2);
 
-        this.portfolios[i].value = (this.portfolios[i].price * this.portfolios[i].balance).toFixed(2);
+        this.portfolios[i].value = (this.portfolios[i].price * this.portfolios[i].balance).toFixed(2);*/
       })
     }
   }
   
   private getMarketRate() {
     if(!this.marketInfo.market_rate) {
-      this.http.get(this._baseURL + '/market/rate')
+      this.http.get(this._baseURL + '/market/get_rate')
       .subscribe(
         data => {
           let res: any = data;

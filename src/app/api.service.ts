@@ -41,7 +41,8 @@ export class ApiService {
   }
 
   getMarketInfo(coin){
-    return this.http.get('https://min-api.cryptocompare.com/data/pricemultifull?fsyms=' + coin + '&tsyms=USD');
+    return this.http.get('https://api.coinmarketcap.com/v1/ticker/' + coin + '/?convert=USD');
+    //  return this.http.get('https://min-api.cryptocompare.com/data/pricemultifull?fsyms=' + coin + '&tsyms=USD');
     //return this.http.get('https://api.coincap.io/v2/assets/'+ market);
   }
 }
