@@ -48,7 +48,7 @@
                             </mat-form-field>
                         </form>
                         <div style="position:absolute; top: 20px; right: 0;">
-                            <p style="font-size: 20px; margin-bottom: 8px;" [ngStyle]="{'color':sendCoin.color}">BTC</p>
+                            <p style="font-size: 20px; margin-bottom: 8px;" [ngStyle]="{'color':sendCoin.color}">{{sendCoin.symbol}}</p>
                             <p style="font-size: 18px; color:white;">USD</p>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                         </button>
                         <ul id="dropdown-basic1" *dropdownMenu class="dropdown-menu w-100 bg-toggle-1"
                             role="menu" aria-labelledby="button-basic1">
-                            <li role="menuitem"  *ngFor="let coin of coin_data; let i = index"><a [ngClass]="coin.hover?'dropdown-item bg-toggle-hover':'dropdown-item bg-toggle'" (mouseover)="changeStyle($event,i)" (mouseout)="changeStyle($event,i)" (click)="setReceiveCoin(i)" >
+                            <li role="menuitem"  *ngFor="let coin of coin_data; let i = index"><a [ngClass]="coin.hover?'dropdown-item bg-toggle-hover':'dropdown-item bg-toggle'" (mouseover)="changeStyle($event,i)" (mouseout)="changeStyle($event,i)" (click)="setReceiveCoin(coin)" >
                                 <div class="d-flex">
                                     <div>
                                         <img [src]="coin.icon" style="height : 40px;">                   
@@ -95,7 +95,7 @@
                             </mat-form-field>
                         </form>
                         <div style="position:absolute; top: 20px; right: 0;">
-                            <p style="font-size: 20px; margin-bottom: 8px;" [ngStyle]="{'color':receiveCoin.color}">BTC</p>
+                            <p style="font-size: 20px; margin-bottom: 8px;" [ngStyle]="{'color':receiveCoin.color}">{{receiveCoin.symbol}}</p>
                             <p style="font-size: 18px; color:white;">USD</p>
                         </div>
                     </div>
@@ -179,8 +179,13 @@
             <h1 class="text-center" *ngIf="marketInfo.exchange_step==3">
                 Exchange Complete
             </h1>
-            <div class="p-5">
-                Your exchange will take about a minute. Once complete, you will hear a success tone and your balances will be updated. You can safely use whie an exchange is in progress.
+            <div class="p-5" style="text-align:center">
+                <div *ngIf="marketInfo.exchange_step<4">
+                    Your exchange will take about a minute. Once complete, you will hear a success tone and your balances will be updated. You can safely use whie an exchange is in progress.
+                </div>
+                <div *ngIf="marketInfo.exchange_step==4" style="color:rgb(192, 0, 0); font-size: 24px;">
+                    Exchange error <br/> please relogin or contact us.
+                </div>
             </div>
         </div>
         <div class="row justify-content-center">
@@ -211,7 +216,7 @@
                 </div>                
             </div>           
         </div>
-        <div class="text-center" *ngIf="marketInfo.exchange_step==3">
+        <div class="text-center" *ngIf="marketInfo.exchange_step>=3">
             <button class="btn_end" (click)='endExchange()'>Close</button>
         </div>
     </div>

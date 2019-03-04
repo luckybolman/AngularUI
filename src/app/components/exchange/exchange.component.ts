@@ -178,8 +178,8 @@ export class ExchangeComponent implements OnInit {
         "userid": this.userInfo.userid,
         "sendcoin": this.sendCoin.symbol,
         "recvcoin": this.receiveCoin.symbol,
-        "sendamount": this.sendingAmountC,
-        "recvamount": this.receivingAmountC
+        "sendamount": parseFloat(this.sendingAmountC),
+        "recvamount": parseFloat(this.receivingAmountC)
       })
       .subscribe(
         data => {
@@ -190,28 +190,31 @@ export class ExchangeComponent implements OnInit {
             this.marketInfo.ex_sendingAmountU = this.sendingAmountU;
             this.marketInfo.ex_receivingAmountU = this.receivingAmountU;
             
+            this.marketInfo.exchange_step ++;  
             this.marketInfo.exchange_id = res.exchange_id;
             if(!this.marketInfo.exchange_refresh_timerid) {
               this.marketInfo.exchange_refresh_timerid = setInterval(()=>{
                 this.refreshExchangeStep();
               }, 10000);       
             }
+          } else {
+            this.marketInfo.exchange_step = 4;    
           }
         },
         error => {
-            console.log("Error", error);
+          this.marketInfo.exchange_step = 4;  
         }
       );           
     }
   }
 
   private refreshExchangeStep() {
-    this.http.get(this._baseURL + '/market/exchange_step?exchangeid' + this.marketInfo.exchange_id + '&userid=' + this.userInfo.userid)
+    this.http.get(this._baseURL + '/market/exchange_step?exchangeid=' + this.marketInfo.exchange_id + '&userid=' + this.userInfo.userid)
     .subscribe(
       data => {
         let res: any = data;
         if(res.status == "SUCCESS" )  {
-          this.marketInfo.exchange_step ++;
+          this.marketInfo.exchange_step = res.step;
           if(this.marketInfo.exchange_step==3) clearInterval(this.marketInfo.exchange_refresh_timerid);
         }
     });
