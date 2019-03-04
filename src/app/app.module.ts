@@ -61,8 +61,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     WalletComponent,
     BackupComponent,
     ChartComponent,
-    AssetsComponent
-    SettingsComponent,
+    AssetsComponent,
+    SettingsComponent
   ],
   imports: [
     HighchartsChartModule,

@@ -37,7 +37,6 @@ const routes: Routes = [
         path : 'settings',
         component: SettingsComponent
     }
-    }
 ];
 
 @NgModule({
