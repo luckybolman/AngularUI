@@ -46,6 +46,7 @@ export class SideMenuComponent implements OnInit {
     if(this.userInfo.bLogined) {
       this.onLogout();
     } else {
+      this.errMessage = '';
       this.modalService.open(content, { centered: true });
     }
   }
@@ -74,7 +75,6 @@ export class SideMenuComponent implements OnInit {
   }
 
   onLogin(username, password) {
-    this.errMessage = '';
     if(username.length == 0 || password.length == 0)
       return "Please input Username and Password";
 
@@ -88,7 +88,6 @@ export class SideMenuComponent implements OnInit {
   }
 
   onRegister(username, email, password) {
-    this.errMessage = '';
     if(username.length == 0 || email.length == 0 || password.length == 0)
       return "Please input Username and Password";
 
