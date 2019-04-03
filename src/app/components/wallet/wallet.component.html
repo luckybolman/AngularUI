@@ -41,7 +41,7 @@
             </div>
           </div>
           <div style="margin-top:50px;">
-            <button class="modal_button" [ngStyle]="{'background-color':selectedCoin.color}" (click)="onSendCoin(sendaddr.value)">
+            <button class="modal_button" [ngStyle]="{'background-color':selectedCoin.color, 'color':selectedCoin.textcolor, 'font-weight': '500'}" (click)="onSendCoin(sendaddr.value)">
               Send
             </button>
           </div>
@@ -108,12 +108,12 @@
           </div>
           <div style="margin-top:20px;">
             <div style="display:inline-block;">
-              <button class="main_btn" [ngStyle]="{'background-color':selectedCoin.color}" (click)="openModal(send, 'send')">
+              <button class="main_btn" [ngStyle]="{'background-color':selectedCoin.color, 'color':selectedCoin.textcolor, 'font-weight': '500'}" (click)="openModal(send, 'send')">
                 Send
               </button>
             </div>
             <div style="display:inline-block">
-              <button class="main_btn" [ngStyle]="{'background-color':selectedCoin.color}" (click)="openModal(receive, 'receive')">
+              <button class="main_btn" [ngStyle]="{'background-color':selectedCoin.color, 'color':selectedCoin.textcolor, 'font-weight': '500'}" (click)="openModal(receive, 'receive')">
                 Receive
               </button>
             </div>
