@@ -133,13 +133,13 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.portfolios[i].cap = parseFloat(market_cap).toFixed(2);
         
         if(parseFloat(raw['24h_volume_usd'])>=1e9)
-          this.portfolios[i].volumn24 = (parseFloat(raw['24h_volume_usd'])/1e9).toFixed(2)+'B';
+          this.portfolios[i].volume24 = (parseFloat(raw['24h_volume_usd'])/1e9).toFixed(2)+'B';
         else if(parseFloat(raw['24h_volume_usd'])>=1e6)        
-          this.portfolios[i].volumn24 = (parseFloat(raw['24h_volume_usd'])/1e6).toFixed(2)+'M';
+          this.portfolios[i].volume24 = (parseFloat(raw['24h_volume_usd'])/1e6).toFixed(2)+'M';
         else if(parseFloat(raw['24h_volume_usd'])>=1e3)
-          this.portfolios[i].volumn24 = (parseFloat(raw['24h_volume_usd'])/1e3).toFixed(2)+'K';
+          this.portfolios[i].volume24 = (parseFloat(raw['24h_volume_usd'])/1e3).toFixed(2)+'K';
         else
-          this.portfolios[i].volumn24 = parseFloat(raw['24h_volume_usd']).toFixed(2);
+          this.portfolios[i].volume24 = parseFloat(raw['24h_volume_usd']).toFixed(2);
 
         this.portfolios[i].value = (this.portfolios[i].price * this.portfolios[i].balance).toFixed(2);
 
@@ -160,13 +160,13 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.portfolios[i].cap = parseFloat(raw.MKTCAP).toFixed(2);
         
         if(parseFloat(raw.TOTALVOLUME24HTO)>=1e9)
-          this.portfolios[i].volumn24 = (parseFloat(raw.TOTALVOLUME24HTO)/1e9).toFixed(2)+'B';
+          this.portfolios[i].volume24 = (parseFloat(raw.TOTALVOLUME24HTO)/1e9).toFixed(2)+'B';
         else if(parseFloat(raw.TOTALVOLUME24HTO)>=1e6)        
-          this.portfolios[i].volumn24 = (parseFloat(raw.TOTALVOLUME24HTO)/1e6).toFixed(2)+'M';
+          this.portfolios[i].volume24 = (parseFloat(raw.TOTALVOLUME24HTO)/1e6).toFixed(2)+'M';
         else if(parseFloat(raw.TOTALVOLUME24HTO)>=1e3)
-          this.portfolios[i].volumn24 = (parseFloat(raw.TOTALVOLUME24HTO)/1e3).toFixed(2)+'K';
+          this.portfolios[i].volume24 = (parseFloat(raw.TOTALVOLUME24HTO)/1e3).toFixed(2)+'K';
         else
-          this.portfolios[i].volumn24 = parseFloat(raw.TOTALVOLUME24HTO).toFixed(2);
+          this.portfolios[i].volume24 = parseFloat(raw.TOTALVOLUME24HTO).toFixed(2);
 
         this.portfolios[i].value = (this.portfolios[i].price * this.portfolios[i].balance).toFixed(2);*/
       })
