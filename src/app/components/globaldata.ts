@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 export class AppConstants {
-  public static get baseURL(): string { return "http://localhost:8000"; }
+  public static get baseURL(): string { return "http://localhost:2020"; }
 }
 
 @Injectable()
@@ -42,6 +42,12 @@ export class CoinInfo {
     return validCoins;
   }
 
+  initBalance() {
+    for(let i=0; i<this.data.length; i++) {
+      this.data[i].balance = 0;
+    }
+  }
+
   dataIndex = {
     'BTC' : 0,
     'ETH' : 1,
@@ -58,12 +64,13 @@ export class CoinInfo {
       symbol:'BTC',
       market:'bitcoin',
       color:'#ea9914',
+      textcolor:'#ffffff',
       icon:'./assets/BTC_Logo.png',
       description:'Bitcoin uses peer-to-peer technology to operate with no central authority or banks. Managing transactions,and the issuing of bitcoins,is carried out collectively by the network.',
       checked: true,
       price : 0,
       cap : 0,
-      volumn24 : '',
+      volume24 : '',
       change24 : 0,
       balance : 0,
       value : 0,
@@ -80,12 +87,13 @@ export class CoinInfo {
       symbol:'ETH',
       market:'ethereum',
       color:'#627eea',
+      textcolor:'#ffffff',
       icon:'./assets/ETH_Logo.png',
       description:'Ethereum is a decentralized platform that runs smart contracts:applications that run exactly as programmed without any possibility of downtown,censorship,fraud or third party interference.',
       checked: true,
       price : 0,
       cap : 0,
-      volumn24 : '',
+      volume24 : '',
       change24 : 0,
       balance : 0,
       value : 0,
@@ -102,12 +110,13 @@ export class CoinInfo {
       symbol:'LTC',
       market:'litecoin',
       color:'#989898',
+      textcolor:'#ffffff',
       icon:'./assets/LTC_Logo.png',
       description:'Litecoin provides fast,2.5 minute transaction confirmations and uses scrypt-based proof-of-work to target everyday computers.Litecoin is often considered the silver to Bitcoin gold.',
       checked: true,
       price : 0,
       cap : 0,
-      volumn24 : '',
+      volume24 : '',
       change24 : 0,
       balance : 0,
       value : 0,
@@ -123,13 +132,14 @@ export class CoinInfo {
       name:'MobilinkToken',
       symbol:'MOLK',
       market:'mobilinktoken',
-      color:'#153281',
+      color:'#f1f1f1',
+      textcolor:'#1d2b3a',
       icon:'./assets/MOLK_Logo.png',
-      description:'',
+      description:'Mobilink Token: Is a decentralized token, where you can send/receive, interact and transact via multiple exchanges and communication platforms. Mobilink Token is designed so MOLK rewards can be earned via proof of participation throughout multiple social networking, and communication platforms.',
       checked: true,
       price : 0,
       cap : 0,
-      volumn24 : '',
+      volume24 : '',
       change24 : 0,
       balance : 0,
       value : 0,
@@ -151,7 +161,7 @@ export class CoinInfo {
       checked: false,
       price : 0,
       cap : 0,
-      volumn24 : '',
+      volume24 : '',
       change24 : 0,
       balance : 0,
       value : 0,
@@ -173,7 +183,7 @@ export class CoinInfo {
       checked: true,
       price : 0,
       cap : 0,
-      volumn24 : '',
+      volume24 : '',
       change24 : 0,
       balance : 0,
       value : 0,

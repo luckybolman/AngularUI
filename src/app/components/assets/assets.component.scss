@@ -35,6 +35,8 @@
     }
 
     .check_item {
+        vertical-align: top;
+        margin-top: 40px;
         text-align: left;
         font-size: 30px;
         display: inline-block;
@@ -48,7 +50,7 @@
 
     .coin_content {
         width: calc(100% - 100px);
-        height: 90px;
+        height: 100px;
         margin-left: 20px;
         background-color: #25374e;
         border-bottom: 2px solid;
@@ -62,9 +64,10 @@
 
     .coin_header {
         width: 25%;
-        height: 88px;
+        height: 98px;
         text-align: left;
         display: inline-block;  
+        vertical-align: top;
     }
 
     .item_icon {
@@ -96,7 +99,9 @@
         width: calc(75% - 70px);   
         font-size:15px;
         margin-left: 20px;
+        margin-top: 5px;
         color: white;
         display: inline-block;
+        vertical-align: middle;
     }
 }

@@ -23,21 +23,7 @@
               <i class="fa fa-square"></i>
             </div>
             <div class="coin_content" [ngStyle]="{'border-color':coinItem.color}">
-              <div class="coin_header" *ngIf="!coinItem.checked">
-                  <img src={{coinItem.icon}} class="item_icon">
-                  <div class="item_header">
-                      <div class="item_title">
-                        {{coinItem.name}}
-                      </div>
-    
-                      <div class="item_unit">
-                        {{coinItem.symbol}}
-                      </div>
-                      
-                    </div> 
-              </div>
-
-              <div class="coin_header" *ngIf="coinItem.checked" [ngStyle]="{'background-color':'#1b2c42'}">
+              <div class="coin_header" [ngStyle]="{'background-color':(coinItem.checked) ? '#1b2c42' : ''}">
                 <img src={{coinItem.icon}} class="item_icon">
                 <div class="item_header">
                   <div class="item_title">
