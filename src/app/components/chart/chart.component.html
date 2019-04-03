@@ -29,18 +29,34 @@
                 </a></li>                          
             </ul>
         </div>
+        <!--
         <div class="btn-group w-100 round" dropdown>
                 <button type="button" id="button-inteval" class="btn btn-interval" dropdownToggle >
                     {{intervalString[currentInterval]}}                  
                 </button>
                 <ul *dropdownMenu class="dropdown-menu bg-interval"
                     role="menu" aria-labelledby="button-inteval" style="cursor:pointer">
-                    <li role="menuitem"><a (click)="changeInterval(0)">1 minutes</a></li>
+                    <li role="menuitem"><a (click)="changeInterval(0)">1 minute</a></li>
                     <li role="menuitem"><a (click)="changeInterval(1)">15 minutes</a></li>                          
                     <li role="menuitem"><a (click)="changeInterval(2)">1 hour</a></li>                          
                     <li role="menuitem"><a (click)="changeInterval(3)">1 day</a></li>                                                    
+                    <li role="menuitem"><a (click)="changeInterval(4)">1 week</a></li>
+                    <li role="menuitem"><a (click)="changeInterval(5)">1 month</a></li>
+                    <li role="menuitem"><a (click)="changeInterval(6)">3 months</a></li>
                 </ul>
             </div>
+        -->
+
+        <mat-button-toggle-group value={{currentInterval}}>
+            <mat-button-toggle value="15m" (click)="changeInterval('15m')">15m</mat-button-toggle>
+            <mat-button-toggle value="30m" (click)="changeInterval('30m')">30m</mat-button-toggle>
+            <mat-button-toggle value="1h"  (click)="changeInterval('1h')">1h</mat-button-toggle>
+            <mat-button-toggle value="1d"  (click)="changeInterval('1d')">1d</mat-button-toggle>
+            <mat-button-toggle value="1w"  (click)="changeInterval('1w')">1w</mat-button-toggle>
+            <mat-button-toggle value="1m"  (click)="changeInterval('1mo')">1mo</mat-button-toggle>
+            <mat-button-toggle value="3mo" (click)="changeInterval('3mo')">3mo</mat-button-toggle>
+        </mat-button-toggle-group>
+
     </div>
     <div class="justify-content-center">
         <highcharts-chart

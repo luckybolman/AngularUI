@@ -80,8 +80,8 @@ export class ChartComponent implements OnInit, OnDestroy {
         data: [] 
     }]}; // required
     
-  intervalString = ['1m','15m','1h','1d'];
-  currentInterval = 0;
+  intervalString = ['1m','15m','1h','1d','1w','1m','3m'];
+  currentInterval = '1d';
   constructor(
     private apiservice : ApiService,
     public coinInfo: CoinInfo
@@ -141,8 +141,12 @@ export class ChartComponent implements OnInit, OnDestroy {
     this.updateFlag = true;
   }
 
-  changeInterval(num){
-    this.currentInterval = num;
+  changeInterval(value){
+    this.currentInterval = value;
     this.getData();
+  }
+
+  onClickButton(element) {
+    console.log(element);
   }
 }

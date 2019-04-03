@@ -13,10 +13,13 @@ export class ApiService {
     let intervalString = '';
     let previous = 0;
     switch (interval){
-      case 0: intervalString = 'm1'; previous = new Date().getTime()-3600*1000; break;
-      case 1: intervalString = 'm15';previous = new Date().getTime()-6*3600*1000;break;
-      case 2: intervalString = 'h1';previous = new Date().getTime()-24*3600*1000;break;
-      default : intervalString = 'd1';previous = new Date().getTime()-31*24*3600*1000;
+      case '15m': intervalString = 'm1'; previous = new Date().getTime()-15*60*1000; break;
+      case '30m': intervalString = 'm1';previous = new Date().getTime()-30*60*1000;break;
+      case '1h': intervalString = 'm1';previous = new Date().getTime()-3600*1000;break;
+      case '1w': intervalString = 'd1';previous = new Date().getTime()-7*24*3600*1000;break;
+      case '1mo': intervalString = 'd1';previous = new Date().getTime()-30*24*3600*1000;break;
+      case '3mo': intervalString = 'd1';previous = new Date().getTime()-90*24*3600*1000;break;
+      default : intervalString = 'h1';previous = new Date().getTime()-24*3600*1000;
     }
     
     let now = new Date().getTime();
@@ -27,11 +30,11 @@ export class ApiService {
     
     let intervalString = '';
     switch (interval){
-      case 0: 
-      case 1: 
+      case '15m': 
+      case '30m': 
         intervalString = 'minute'; 
         break;
-      case 2: 
+      case '1h': 
         intervalString = 'hour'; 
         break;
       default : 

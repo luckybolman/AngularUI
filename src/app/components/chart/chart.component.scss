@@ -23,12 +23,7 @@
     border-radius: 10px;
     background-color : #0e151d;
 }
-.btn-interval {
-    color : white;
-    background-color: #6c7c8d;
-    line-height:  18px;
-    margin : 10px 0;
-}
+
 .bg-interval {
     background-color: #6c7c8d;
     color : white;
@@ -36,3 +31,35 @@
         padding :0 10px;
     }
 }
+
+.mat-button-toggle-group {
+    margin-top: 10px;
+}
+
+.mat-button-toggle {
+    border: 1px solid #f28628;
+    border-radius: 4px;
+    margin-left: 1px;
+    margin-right:1px;
+    width: 60px;
+    height: 30px;
+    font-family: 'Nunito Semibold', sans-serif;
+    font-size: 14px;
+    font-style: bold;
+    ::ng-deep .mat-button-toggle-label-content {
+        line-height: 28px;
+    }
+}
+
+
+
+.mat-button-toggle-checked {
+    background-color: #6c7c8d;
+}
+
+/*
+.mat-button-toggle-disabled{
+    border: 1px solid #c5c0c7;
+    background-color: #e1dde5;
+}
+*/
