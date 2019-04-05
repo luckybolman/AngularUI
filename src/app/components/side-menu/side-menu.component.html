@@ -1,21 +1,19 @@
 <div class="d-flex background-main">
   <ng-template #login let-modal>
-    <div style="background-color: #1d2b3a;">
-        <img src="./assets/close_button.png" class="close_button" (click)="modal.dismiss('Cross click')">
-    </div>
+    <div class="dialog-header"> Login </div> 
     <div class="modal-body">
-      <h1 class="login-header"> Login </h1> 
-      <div style="padding-left: 30px; height: 10px; color:#ec420c;"> {{errMessage}} </div>
+      <div class="alert" [ngStyle]="{'background-color':(errMessage) ? '#eb3700' : ''}"> {{errMessage}} </div>
       <div style="padding: 10px 30px;">
         <form class="input-form" >
-          <h5 style="margin: 15px 0px;">Username</h5>
-          <mat-form-field class="input-full-width">
+          <div class="login_labels">Username</div>
+          <mat-form-field class="login-inputs">
             <input #loginUsername matInput>
           </mat-form-field>
-          <h5 style="margin: 15px 0px;">Password</h5>
-          <mat-form-field class="input-full-width">
+          <div class="login_labels">Password</div>
+          <mat-form-field class="login-inputs">
             <input #loginPassword matInput type="password">
           </mat-form-field>
+          <div class="forgot-password" (click)="openModal(resetpwd); modal.dismiss('Cross click');"> Forgot Password ? </div>
           <div class="login-button" (click)="onLogin(loginUsername.value, loginPassword.value)"> Login </div>
           <div class="register-button" (click)="openModal(register); modal.dismiss('Cross click');"> Register </div>
         </form>
@@ -23,27 +21,60 @@
     </div>
   </ng-template>
   <ng-template #register let-modal>
-    <div style="background-color: #1d2b3a;">
-        <img src="./assets/close_button.png" class="close_button" (click)="modal.dismiss('Cross click')">
-    </div>
+    <div class="dialog-header"> Register </div> 
     <div class="modal-body">
-      <h1 class="login-header"> Register </h1> 
-      <div style="padding-left: 30px; height: 10px; color:#ec420c;"> {{errMessage}} </div>
+      <div class="alert" [ngStyle]="{'background-color':(errMessage) ? '#eb3700' : ''}"> {{errMessage}} </div>
       <div style="padding: 10px 30px;">
         <form class="input-form" >
-          <h5 style="margin: 15px 0px;">Email</h5>
-          <mat-form-field class="input-full-width">
+          <div class="regiter_labels">Email Address</div>
+          <mat-form-field class="register-inputs">
             <input #registerEmail matInput>
           </mat-form-field>
-          <h5 style="margin: 15px 0px;">Username</h5>
-          <mat-form-field class="input-full-width">
+          <div class="regiter_labels">Username</div>
+          <mat-form-field class="register-inputs">
             <input #registerUsername matInput>
           </mat-form-field>
-          <h5 style="margin: 15px 0px;">Password</h5>
-          <mat-form-field class="input-full-width">
+          <div class="regiter_labels">Password</div>
+          <mat-form-field class="register-inputs">
             <input #registerPassword matInput type="password">
           </mat-form-field>
-          <div class="login-button" (click)="onRegister(registerUsername.value, registerEmail.value, registerPassword.value)"> Register </div>
+          <div class="regiter_labels">Confirm Password</div>
+          <mat-form-field class="register-inputs">
+            <input #confirmPassword matInput type="password">
+          </mat-form-field>
+          <div class="register-button_full" (click)="onRegister(registerUsername.value, registerEmail.value, registerPassword.value, confirmPassword.value)"> Register Now</div>
+        </form>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #resetpwd let-modal>
+    <div class="dialog-header"> Reset Password </div> 
+    <div class="modal-body">
+      <div class="alert" [ngStyle]="{'background-color':(errMessage) ? '#eb3700' : (alertMessage) ? '#28a745' : ''}"> 
+        {{errMessage }} {{alertMessage}} 
+      </div>
+      <div style="padding: 0px 30px;">
+        <form class="input-form" >
+          <div style="margin: 0px 18px 10px 18px; text-align: center"> Please enter your email address to request a password reset. </div>
+          <div class="reset_labels">Email Address</div>
+          <mat-form-field class="reset-inputs">
+            <input #emailaddr matInput>
+          </mat-form-field>
+          <div class="request-button" (click)="resetPassword(emailaddr.value)"> Reset Password</div>  
+          <hr>
+          <div class="reset_labels">Verification Code</div>
+          <mat-form-field class="reset-inputs">
+            <input #vcode matInput>
+          </mat-form-field>
+          <div class="reset_labels">New Password</div>
+          <mat-form-field class="reset-inputs">
+            <input #newpsss matInput type="password">
+          </mat-form-field>
+          <div class="reset_labels">Confirm Password</div>
+          <mat-form-field class="reset-inputs">
+            <input #repeatpass matInput type="password">
+          </mat-form-field>
+          <div class="request-button" (click)="changePassword(vcode.value, newpsss.value, repeatpass.value)"> Change Password </div>
         </form>
       </div>
     </div>
@@ -88,6 +119,10 @@
         <a mat-list-item routerLink="/settings" [ngClass]="pageName=='settings'?'focus':''" [ngStyle]="{'display': !userInfo.bLogined? 'none' : ''}">      
           <i class="fa fa-cogs"></i>
           &nbsp;&nbsp; Settings
+        </a>
+        <a mat-list-item routerLink="/admin" [ngClass]="pageName=='admin'?'focus':''" [ngStyle]="{'display': !userInfo.bLogined? 'none' : ''}">      
+          <i class="fa fa fa-user-circle-o"></i>
+          &nbsp;&nbsp; Admin
         </a>
         <div class="fixed-bottom bottom-menu">
             <!-- <a mat-list-item href="/setting">      

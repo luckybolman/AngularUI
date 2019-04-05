@@ -1,4 +1,4 @@
- .sidenav-container {
+  .sidenav-container {
     height: 100%;
     z-index: 20;
   }
@@ -44,24 +44,71 @@
   .modal-body {
     background-color: #1d2b3a;
     color: #eee;
+    padding-top: 0px;
+
+    .alert {
+      margin: 10px 30px;
+      text-align: center;
+      height: 40px;
+      padding: 5px;
+      color: white;
+    //  background-color:#eb3700; 
+    }
   }
 
-  .login-header {
+  .dialog-header {
+    color: #eee;
+    background-color: #26292d;
+    border-bottom: 1px solid #61583b;
     text-align: center;
-    margin-bottom: 30px;
+    font-size: 30px;
+    font-weight: bold;
+    padding-top: 3px;
+    padding-bottom: 2px;
   }
 
+  .reset-header {
+    margin-top: 5px;
+    text-align: center;
+    color: #eee;
+  }
+
+  hr { 
+    margin-top: 2em;
+    margin-bottom: 2em;
+    border-width: 3px;
+    border: 1px inset #8e7878;
+  } 
 
   .input-form {
     width: 100%;
     color: #ccc;
     border-color:#eee;
-    .input-full-width{
+    .login-inputs{
       width: 100%;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
       padding: 10px;
-      background-color: #141414;
+      background-color: #151515;
     }
+    .register-inputs{
+      width: 100%;
+      margin-bottom: 25px;
+      padding: 5px 10px;
+      background-color: #151515;
+    }
+    .reset-inputs {
+      width: 100%;
+      margin-top: 2px;
+      margin-bottom: 10px;
+      padding: 5px 10px;
+      background-color: #151515;
+    };
+    .login-labels,
+    .regiter-labels,
+    .reset-labels {
+      font-weight:500;
+    }
+
   }
 
   .login-button,
@@ -70,7 +117,7 @@
     margin-top: 15px;
     display: inline-block;
     background-color: rgb(45, 92, 131);
-    width: 120px;
+    width: 150px;
     text-align: center;
     padding: 10px;
     &:hover { 
@@ -81,11 +128,34 @@
       background-color: rgb(5, 10, 14);
     }
   }
-
   .register-button {
     float: right;
   }
 
+  .register-button_full,
+  .request-button {
+    cursor: pointer;
+    display: inline-block;
+    background-color: rgb(45, 92, 131);
+    width: 100%;
+    text-align: center;
+    padding: 5px 10px;
+    &:hover { 
+      background-color: steelblue;
+    }
+
+    &:action { 
+      background-color: rgb(5, 10, 14);
+    }
+  }
+
+
   .bottom-menu {
     width: 200px;
+  }
+
+  .forgot-password {
+    cursor: pointer;
+    color: #7fa2c7;
+    margin-bottom: 15px;
   }
